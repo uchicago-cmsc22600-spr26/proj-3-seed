@@ -44,9 +44,11 @@ structure CheckExp : sig
      * introduces an upcast coercion around the expression `e`.  We assume that `from`
      * is the actual type of `e` and `to` is the expected type.
      *)
-    fun coerce (arg as {from, to, e}) = if TypeUtil.subtype(from, to)
-          then  AST.EXP_Coerce arg
-          else e
+    fun coerce (arg as {from, to, e}) = if TypeUtil.equal(from, to)
+            then e
+          else if TypeUtil.subtype(from, to)
+            then AST.EXP_Coerce arg
+            else raise Fail "invalid coerce"
 
     (* typecheck the expression `e` where we expect it to have `expectedTy` as
      * its type.  If its type is a subtype of the expected type, then we insert
@@ -85,7 +87,7 @@ structure CheckExp : sig
     and check (env, exp) = (case exp
            of PT.EXP_Mark{span, tree} => check (Env.setSpan(env, span), tree)
             | PT.EXP_Absorb(e1, e2) => (case check (env, e1)
-                 of (e1', Ty.OptTy ty1) => let
+                 of (e1', lhsTy as Ty.OptTy ty1) => let
                       val (e2', ty2) = check (env, e2)
                       in
                         case TypeUtil.join(ty1, ty2)
@@ -97,19 +99,19 @@ structure CheckExp : sig
                                 ]);
                               bogusExpTy)
                           | SOME ty => let
-                              val e1' = coerce{from=ty1, to=ty, e=e1'}
+                              val e1' = coerce{from=lhsTy, to=Ty.OptTy ty, e=e1'}
                               val e2' = coerce{from=ty2, to=ty, e=e2'}
                               in
                                 (AST.EXP_Absorb(e1', e2'), ty)
                               end
                         (* end case *)
                       end
-                  | (_, ty1) => let
+                  | (_, lhsTy) => let
                       val (_, ty2) = check (env, e2)
                       in
                         Err.error (env, [
                             S "excepted option type for lhs argument to '??', but found ",
-                            TY ty1
+                            TY lhsTy
                           ]);
                         (bogusExp, ty2)
                       end
@@ -183,7 +185,7 @@ structure CheckExp : sig
                 in
                   case Env.findClass (env, #tree cls)
                    of SOME cls' => if TypeUtil.subtype(Ty.ClsTy cls', ty)
-                        then (AST.EXP_As(cls', e'), Ty.ClsTy cls')
+                        then (AST.EXP_As(cls', e'), Ty.OptTy(Ty.ClsTy cls'))
                         else (
                           Err.error (env, [
                               S "type of argument ", TY ty, S " is not supertype of ",

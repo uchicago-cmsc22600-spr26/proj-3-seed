@@ -250,7 +250,9 @@ structure PrintParseTree : sig
                   prList exp (strm, args))))
             | PT.EXP_As(cls, arg) => (
                 prNode (strm, "EXP_As");
-                nest strm (fn strm => prId(strm, cls)))
+                nest strm (fn strm => (
+                  prId(strm, cls);
+                  exp (strm, arg))))
             | PT.EXP_Nil tyc => (
                 prNode (strm, "EXP_Nil");
                 nest strm (fn strm => typ (strm, tyc)))
