@@ -1,0 +1,7 @@
+ID                      [comment-test.sool:1.1-12] 
+ID                      [comment-test.sool:3.1-9] 
+STRING                  [comment-test.sool:5.1-40] 
+ID                      [comment-test.sool:7.1-7] 
+*                       [comment-test.sool:7.9] 
+/                       [comment-test.sool:7.10] 
+EOF                     [comment-test.sool:8.1-0] 

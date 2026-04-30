@@ -1,0 +1,6 @@
+/* check for redeclaration */
+
+class main () {  // to keep the main check happy
+  method run () -> void { return; }
+  override method run () -> void { return; } // error redeclaration of run
+}

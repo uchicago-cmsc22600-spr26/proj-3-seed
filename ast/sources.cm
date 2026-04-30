@@ -1,0 +1,43 @@
+(* sources.cm
+ *
+ * COPYRIGHT (c) 2026 John Reppy (https://cs.uchicago.edu/~jhr)
+ * All rights reserved.
+ *
+ * Sample code
+ * CMSC 22600
+ * Spring 2026
+ * University of Chicago
+ *)
+
+Library
+
+  structure AST
+  structure ASTPP
+  structure Basis
+  structure Class
+  structure Interface
+  structure LocalVar
+  structure MemberFun
+  structure MemberVar
+  structure TypeOf
+  structure Types
+
+is
+
+  $/basis.cm
+  $/smlnj-lib.cm
+  $/pp-lib.cm
+
+  ../common/sources.cm
+
+  ast.sml
+  ast-pp.sml
+  basis.sml
+  class.sml
+  interface.sml
+  local-var.sml
+  member-fun.sml
+  member-var.sml
+  type-of.sml
+  types.sml
+  util.sml

@@ -1,0 +1,9 @@
+anIdentifier
+/* the following characters are not used in SooL */
+# $ % ^ _ [ ] ' ` ~ >
+anotherId
+// invalid tokens
+|
+&
+theEnd
+

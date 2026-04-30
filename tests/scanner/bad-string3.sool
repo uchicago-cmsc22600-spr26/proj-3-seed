@@ -1,0 +1,3 @@
+/* illegal escape sequence */
+"embedded nuls \000 are not allowed in strings"
+

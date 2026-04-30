@@ -1,0 +1,18 @@
+/* test class declaration checking */
+
+class A () {
+  method f () -> void { }
+}
+
+class B () extends A () {
+  method g () -> bool { return true; }
+  method h (x : int, y : int) -> A { return self; }
+}
+
+class C () extends A () {
+  method f () -> void { return; } /* error: redeclaration of f without override */
+}
+
+class main () {  // to keep the main check happy
+  method run () -> void { return; }
+}

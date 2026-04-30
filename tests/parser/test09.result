@@ -1,0 +1,21 @@
+PROGRAM
+  [
+    DCL_Interface
+      aI
+      <none>
+      [
+        MSPC
+          foo
+          [ ]
+          TY_Void
+      ]
+    DCL_Interface
+      bI
+      extends aI
+      [
+        MSPC
+          bar
+          [ ]
+          TY_String
+      ]
+  ]

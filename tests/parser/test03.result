@@ -1,0 +1,26 @@
+PROGRAM
+  [
+    DCL_Class
+      main
+      [ ]
+      <none>
+      [ ]
+      [
+        MDCL
+          run
+          [ ]
+          TY_Void
+          BLK
+            [
+              STM_Call
+                EXP_Apply
+                  MEMB
+                    EXP_Var(system)
+                    DOT
+                    print
+                  [
+                    EXP_String("hello world\n")
+                  ]
+            ]
+      ]
+  ]

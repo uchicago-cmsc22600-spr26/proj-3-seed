@@ -1,0 +1,15 @@
+/* all of the tokens in the SooL language */
+as bool class else extends false
+if int interface method nil override
+return self string true var void
+while
+( ) { } && || ?? = == !=
+<= < @ + - * / . ! ?
+, ; : ->
+"hello world\n"
+123
+ABC
+def
+xYz
+this_is_a_long_id
+ifx // not to be confused with "if x"

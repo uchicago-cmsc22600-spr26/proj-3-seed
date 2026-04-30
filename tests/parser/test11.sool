@@ -1,0 +1,19 @@
+// test11.sool
+//
+// Example from Section 2.8 in Project Overview
+//
+
+class int_or_str () {
+  method asInt () -> ios_int? { ios_int.as(self); }
+  method asStr () -> ios_str? { ios_str.as(self); }
+}
+// the Int constructor
+class ios_int (n : int) extends int_or_str() {
+  var v : int = n
+  method value () -> int { return self.v; }
+}
+// the Str constructor
+class ios_str (s : String) extends int_or_str() {
+  var v : string = s
+  method value () -> string { return self.v; }
+}

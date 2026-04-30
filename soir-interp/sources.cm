@@ -1,0 +1,36 @@
+(* sources.cm
+ *
+ * COPYRIGHT (c) 2026 John Reppy (https://cs.uchicago.edu/~jhr)
+ * All rights reserved.
+ *
+ * Sample code
+ * CMSC 22600
+ * Spring 2026
+ * University of Chicago
+ *)
+
+Library
+
+  structure Interp
+
+is
+
+  $/basis.cm
+  $/smlnj-lib.cm
+
+  ../ast/sources.cm
+  ../common/sources.cm
+  ../parse-tree/sources.cm
+  ../parser/sources.cm
+  ../normalize/sources.cm
+  ../type-checker/sources.cm
+  ../soir/sources.cm
+
+  dynamic-env.sml
+  eval.sml
+  interp.sml
+  runtime.sml
+  util.sml
+  value.sml
+  varmap.sml
+

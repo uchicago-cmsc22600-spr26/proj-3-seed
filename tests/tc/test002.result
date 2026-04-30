@@ -1,0 +1,7 @@
+/* AST: after type checking */
+class main () {
+  method run (self : main) -> void {
+    system.print((toStringI :> string)"hello world\n");
+  }
+}
+/* Program end */

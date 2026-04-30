@@ -1,0 +1,74 @@
+/* test how subtyping is handled */
+
+interface I {
+  method f () -> void
+}
+interface J extends I {
+  method g () -> void
+}
+class A() {
+  method f () -> void { }
+  method g () -> void { }
+}
+
+class main () {
+  method run () -> void { }
+
+  method id01 (a : bool) -> bool { return a; }
+  method id02 (a : bool?) -> bool? { return a; }
+  method id03 (a : bool) -> boolI { return a; }
+  method id04 (a : bool?) -> boolI? { return a; }
+  method id05 (a : boolI) -> boolI { return a; }
+  method id06 (a : boolI?) -> boolI? { return a; }
+
+  method id11 (a : int) -> int { return a; }
+  method id12 (a : int?) -> int? { return a; }
+  method id13 (a : int) -> intI { return a; }
+  method id14 (a : int?) -> intI? { return a; }
+  method id15 (a : intI) -> intI { return a; }
+  method id16 (a : intI?) -> intI? { return a; }
+
+  method id21 (a : string) -> string { return a; }
+  method id22 (a : string?) -> string? { return a; }
+  method id23 (a : string) -> stringI { return a; }
+  method id24 (a : string?) -> stringI? { return a; }
+  method id25 (a : stringI) -> stringI { return a; }
+  method id26 (a : stringI?) -> stringI? { return a; }
+
+  method t01 () -> void {
+    var x = self.id11 (1);
+    var x = self.id12 (2);
+    var x = self.id12 (int.nil);
+    var x = self.id13 (45);
+    var x = self.id14 (12);
+    var x = self.id14 (int.nil);
+    var x = self.id15 (-2);
+    var x = self.id16 (42);
+    var x = self.id16 (int.nil);
+  }
+
+  method t02 () -> void {
+    var x = self.id01 (false);
+    var x = self.id02 (false);
+    var x = self.id02 (bool.nil);
+    var x = self.id03 (false);
+    var x = self.id04 (false);
+    var x = self.id04 (bool.nil);
+    var x = self.id05 (false);
+    var x = self.id06 (false);
+    var x = self.id06 (bool.nil);
+  }
+
+  method t03 () -> void {
+    var x = self.id21 ("hi");
+    var x = self.id22 ("hi");
+    var x = self.id22 (string.nil);
+    var x = self.id23 ("hi");
+    var x = self.id24 ("hi");
+    var x = self.id24 (string.nil);
+    var x = self.id25 ("hi");
+    var x = self.id26 ("hi");
+    var x = self.id26 (string.nil);
+  }
+
+}

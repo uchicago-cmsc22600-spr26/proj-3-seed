@@ -1,0 +1,8 @@
+// hello.sool
+//
+
+class main () {
+    method run () -> void {
+	system.print ("hello world\n");
+    }
+}

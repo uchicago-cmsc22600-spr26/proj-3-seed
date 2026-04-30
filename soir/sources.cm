@@ -1,0 +1,43 @@
+(* sources.cm
+ *
+ * COPYRIGHT (c) 2026 John Reppy (https://cs.uchicago.edu/~jhr)
+ * All rights reserved.
+ *
+ * Sample code
+ * CMSC 22600
+ * Spring 2026
+ * University of Chicago
+ *)
+
+Library
+
+  structure PrimOp
+  structure ProgPt
+  structure SOIR
+  structure SOIRBasis
+  structure SOIRFunc
+  structure SOIRIndex
+  structure SOIRPP
+  structure SOIRType
+  structure SOIRUtil
+  structure SOIRVar
+
+is
+
+  $/basis.cm
+  $/smlnj-lib.cm
+  $/pp-lib.cm
+
+  ../ast/sources.cm
+  ../common/sources.cm
+
+  prim-op.sml
+  prog-pt.sml
+  soir.sml
+  soir-basis.sml
+  soir-func.sml
+  soir-index.sml
+  soir-pp.sml
+  soir-type.sml
+  soir-util.sml
+  soir-var.sml

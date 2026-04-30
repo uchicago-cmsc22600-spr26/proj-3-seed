@@ -1,0 +1,33 @@
+(* sources.cm
+ *
+ * COPYRIGHT (c) 2026 John Reppy (https://cs.uchicago.edu/~jhr)
+ * All rights reserved.
+ *
+ * Sample code
+ * CMSC 22600
+ * Spring 2026
+ * University of Chicago
+ *)
+
+Library
+
+  structure Normalize
+
+is
+
+  $/basis.cm
+  $/smlnj-lib.cm
+
+  ../ast/sources.cm
+  ../common/sources.cm
+  ../soir/sources.cm
+
+  analyze-ast.sml
+  basis-members.sml
+  coercions.sml
+  coercion-graph.sml
+  env.sml
+  internal-classes.sml
+  normalize.sml
+  util.sml
+

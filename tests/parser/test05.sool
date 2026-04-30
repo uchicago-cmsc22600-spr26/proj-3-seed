@@ -1,0 +1,8 @@
+// test 04.sool
+
+class main (x : bool) {
+  var y : bool = x
+  var z : int = 42
+  method run () -> void { return; }
+  method foo (x : int) -> int { return x; }
+}

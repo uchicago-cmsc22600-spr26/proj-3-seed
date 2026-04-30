@@ -1,0 +1,41 @@
+/* test how equality is handled */
+
+interface I {
+  method f () -> void
+}
+interface J extends I {
+  method g () -> void
+}
+class A() {
+  method f () -> void { }
+  method g () -> void { }
+}
+
+class main () {
+  method run () -> void { }
+
+  method eq01 (a : bool, b : bool) -> bool { return (a == b); }
+  method eq02 (a : int, b : int) -> bool { return (a == b); }
+  method eq03 (a : string, b : string) -> bool { return (a == b); }
+  method eq04 (a : bool?, b : bool?) -> bool { return (a == b); }
+  method eq05 (a : int?, b : int?) -> bool { return (a == b); }
+  method eq06 (a : string?, b : string?) -> bool { return (a == b); }
+  method eq07 (a : bool?, b : bool) -> bool { return (a == b); }
+  method eq08 (a : int, b : int?) -> bool { return (a == b); }
+  method eq09 (a : string?, b : string) -> bool { return (a == b); }
+
+  method eq10 (a : A, b : A) -> bool { return (a == b); }
+  method eq11 (a : A, b : J) -> bool { return (a == b); }
+  method eq12 (a : A, b : I) -> bool { return (a == b); }
+  method eq13 (a : A?, b : A?) -> bool { return (a == b); }
+  method eq14 (a : A, b : A?) -> bool { return (a == b); }
+// not type correct because A? <\: J and J <\: A?
+//  method eq15 (a : A?, b : J) -> bool { return (a == b); }
+  method eq16 (a : A, b : J?) -> bool { return (a == b); }
+  method eq17 (a : A?, b : J?) -> bool { return (a == b); }
+  method eq18 (a : I, b : I) -> bool { return (a == b); }
+  method eq19 (a : I, b : J) -> bool { return (a == b); }
+  method eq20 (a : I?, b : I) -> bool { return (a == b); }
+  method eq21 (a : I?, b : I?) -> bool { return (a == b); }
+
+}

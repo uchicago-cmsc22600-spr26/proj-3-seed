@@ -1,0 +1,8 @@
+/* check that invalid integer literals are detected */
+
+class main () {
+  var good : int = 4611686018427387903      // 2^62-1 is valid
+  var bad1 : int = 4611686018427387904      // 2^62 is too big
+  var bad2 : int = -4611686018427387904     // 2^62 is too big (the "-" is an operator)
+  method run () -> void { return; }
+}

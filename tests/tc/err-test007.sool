@@ -1,0 +1,13 @@
+/* test member-function visibility checking */
+
+class A () {
+  var x : int = 1
+}
+
+class B (anA : A) {
+  var y : int = anA.x		/* error: B not a subclass of A */
+}
+
+class main () {  // to keep the main check happy
+  method run () -> void { return; }
+}

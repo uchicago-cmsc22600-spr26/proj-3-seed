@@ -1,0 +1,6 @@
+/* AST: after type checking */
+class main () {
+  method run (self : main) -> void {
+  }
+}
+/* Program end */

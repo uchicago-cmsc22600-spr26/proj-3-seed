@@ -1,0 +1,36 @@
+(* sources.cm
+ *
+ * COPYRIGHT (c) 2026 John Reppy (https://cs.uchicago.edu/~jhr)
+ * All rights reserved.
+ *
+ * Sample code
+ * CMSC 22600
+ * Spring 2026
+ * University of Chicago
+ *
+ * CM sources file for the SooL type checker.
+ *)
+
+Library
+
+  structure TypeChecker
+
+is
+
+  $/basis.cm
+  $/smlnj-lib.cm
+
+  ../ast/sources.cm
+  ../common/sources.cm
+  ../parse-tree/sources.cm
+
+  env.sml
+  basis-env.sml
+  check-block.sml
+  check-exp.sml
+  check-params.sml
+  check-type.sml
+  define-member.sml
+  type-error.sml
+  type-util.sml
+  typechecker.sml

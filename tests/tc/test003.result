@@ -1,0 +1,106 @@
+/* AST: after type checking */
+interface I {
+  method f () -> void
+}
+interface J {
+  method f () -> void
+  method g () -> void
+}
+class A () {
+  method f (self : A) -> void {
+  }
+  method g (self : A) -> void {
+  }
+}
+class main () {
+  method run (self : main) -> void {
+  }
+  method id01 (self : main, a : bool) -> bool {
+    return a;
+  }
+  method id02 (self : main, a : bool?) -> bool? {
+    return a;
+  }
+  method id03 (self : main, a : bool) -> boolI {
+    return (boolI :> bool)a;
+  }
+  method id04 (self : main, a : bool?) -> boolI? {
+    return (boolI? :> bool?)a;
+  }
+  method id05 (self : main, a : boolI) -> boolI {
+    return a;
+  }
+  method id06 (self : main, a : boolI?) -> boolI? {
+    return a;
+  }
+  method id11 (self : main, a : int) -> int {
+    return a;
+  }
+  method id12 (self : main, a : int?) -> int? {
+    return a;
+  }
+  method id13 (self : main, a : int) -> intI {
+    return (intI :> int)a;
+  }
+  method id14 (self : main, a : int?) -> intI? {
+    return (intI? :> int?)a;
+  }
+  method id15 (self : main, a : intI) -> intI {
+    return a;
+  }
+  method id16 (self : main, a : intI?) -> intI? {
+    return a;
+  }
+  method id21 (self : main, a : string) -> string {
+    return a;
+  }
+  method id22 (self : main, a : string?) -> string? {
+    return a;
+  }
+  method id23 (self : main, a : string) -> stringI {
+    return (stringI :> string)a;
+  }
+  method id24 (self : main, a : string?) -> stringI? {
+    return (stringI? :> string?)a;
+  }
+  method id25 (self : main, a : stringI) -> stringI {
+    return a;
+  }
+  method id26 (self : main, a : stringI?) -> stringI? {
+    return a;
+  }
+  method t01 (self : main) -> void {
+    var x : int = self.id11(1);
+    var x : int? = self.id12((int? :> int)2);
+    var x : int? = self.id12((nil int));
+    var x : intI = self.id13(45);
+    var x : intI? = self.id14((int? :> int)12);
+    var x : intI? = self.id14((nil int));
+    var x : intI = self.id15((intI :> int)(0 '-' 2));
+    var x : intI? = self.id16((intI? :> int)42);
+    var x : intI? = self.id16((intI? :> int?)(nil int));
+  }
+  method t02 (self : main) -> void {
+    var x : bool = self.id01(false);
+    var x : bool? = self.id02((bool? :> bool)false);
+    var x : bool? = self.id02((nil bool));
+    var x : boolI = self.id03(false);
+    var x : boolI? = self.id04((bool? :> bool)false);
+    var x : boolI? = self.id04((nil bool));
+    var x : boolI = self.id05((boolI :> bool)false);
+    var x : boolI? = self.id06((boolI? :> bool)false);
+    var x : boolI? = self.id06((boolI? :> bool?)(nil bool));
+  }
+  method t03 (self : main) -> void {
+    var x : string = self.id21("hi");
+    var x : string? = self.id22((string? :> string)"hi");
+    var x : string? = self.id22((nil string));
+    var x : stringI = self.id23("hi");
+    var x : stringI? = self.id24((string? :> string)"hi");
+    var x : stringI? = self.id24((nil string));
+    var x : stringI = self.id25((stringI :> string)"hi");
+    var x : stringI? = self.id26((stringI? :> string)"hi");
+    var x : stringI? = self.id26((stringI? :> string?)(nil string));
+  }
+}
+/* Program end */

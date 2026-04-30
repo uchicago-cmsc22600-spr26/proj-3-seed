@@ -1,0 +1,92 @@
+PROGRAM
+  [
+    DCL_Class
+      int_or_str
+      [ ]
+      <none>
+      [ ]
+      [
+        MDCL
+          asInt
+          [ ]
+          TY_Id(ios_int) OPT
+          BLK
+            [
+              STM_Call
+                EXP_As
+                  ios_int
+            ]
+        MDCL
+          asStr
+          [ ]
+          TY_Id(ios_str) OPT
+          BLK
+            [
+              STM_Call
+                EXP_As
+                  ios_str
+            ]
+      ]
+    DCL_Class
+      ios_int
+      [
+        PARAM
+          n
+          TY_Int
+      ]
+      extends
+        int_or_str
+        [ ]
+      [
+        VDCL
+          v
+          TY_Int
+          EXP_Var(n)
+      ]
+      [
+        MDCL
+          value
+          [ ]
+          TY_Int
+          BLK
+            [
+              STM_Return
+                EXP_Select
+                  MEMB
+                    EXP_Var(self)
+                    DOT
+                    v
+            ]
+      ]
+    DCL_Class
+      ios_str
+      [
+        PARAM
+          s
+          TY_Id(String)
+      ]
+      extends
+        int_or_str
+        [ ]
+      [
+        VDCL
+          v
+          TY_String
+          EXP_Var(s)
+      ]
+      [
+        MDCL
+          value
+          [ ]
+          TY_String
+          BLK
+            [
+              STM_Return
+                EXP_Select
+                  MEMB
+                    EXP_Var(self)
+                    DOT
+                    v
+            ]
+      ]
+  ]

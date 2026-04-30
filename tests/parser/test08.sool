@@ -1,0 +1,17 @@
+// test08.sool
+//
+
+interface funcI {
+  method apply (int) -> int
+}
+
+class main () {
+  method run () -> void { }
+  method for (start : int, ub : int, obj : funcI) -> void {
+    var i = start;
+    while (i < ub) {
+      obj.apply(i);
+      i = i+1;
+    }
+  }
+}

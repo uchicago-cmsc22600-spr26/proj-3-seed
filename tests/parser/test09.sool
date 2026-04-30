@@ -1,0 +1,10 @@
+// test09.sool
+//
+
+interface aI {
+  method foo () -> void
+}
+
+interface bI extends aI {
+  method bar () -> string
+}

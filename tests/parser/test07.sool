@@ -1,0 +1,19 @@
+// test07.sool
+//
+
+class main () {
+  method run () -> void { }
+  method foo (b : bool) -> void {
+    if b { system.print ("ok"); }
+  }
+  method bar (b : bool) -> void {
+    if b { system.print ("ok"); } else { system.print ("fail\n"); }
+  }
+  method bar (b1 : bool, b2 : bool) -> void {
+    if b1 && b2 { system.print ("ok/ok"); }
+    else if b1 { system.print ("ok/fail"); }
+    else if b2 { system.print ("fail/ok"); }
+    else { system.print ("fail/fail\n"); }
+  }
+
+}

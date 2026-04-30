@@ -1,0 +1,359 @@
+(* sool.grm
+ *
+ * COPYRIGHT (c) 2026 John Reppy (https://cs.uchicago.edu/~jhr)
+ * All rights reserved.
+ *
+ * Sample code
+ * CMSC 22600
+ * Spring 2026
+ * University of Chicago
+ *
+ * ml-antlr specification for SooL.
+ *)
+
+%name Sool;
+
+%defs (
+  structure PT = ParseTree
+
+(* apply a mark constructor to a span and a tree *)
+  fun mark cons (span : AntlrStreamPos.span, tr) = cons{span = span, tree = tr}
+
+(* specialize mark functions for common node types *)
+  fun markStm (_, e as PT.STM_Mark _) = e
+    | markStm (sp, tr) = mark PT.STM_Mark (sp, tr)
+  fun markExp (_, e as PT.EXP_Mark _) = e
+    | markExp (sp, tr) = mark PT.EXP_Mark (sp, tr)
+
+(* build the parse tree for the conditional operators *)
+  fun mkCondExp cons lpos = let
+        fun mk (e, []) = e
+          | mk (e, (e', rpos)::r) = mk (markExp((lpos, rpos), cons(e, e')), r)
+        in
+          mk
+        end
+
+(* build an application for an infix binary operator *)
+  fun mkBinApp (e1, rator, e2) = PT.EXP_BinOp(e1, rator, e2)
+
+(* construct application expressions for left-associative binary operators *)
+  fun mkLBinExp (_, e, []) = e
+    | mkLBinExp (lpos, e, (id, e', rpos)::r) =
+        mkLBinExp (lpos, markExp((lpos, rpos), mkBinApp(e, id, e')), r)
+
+(* make an expression consisting of field and method selections *)
+  fun mkSelExp (lpos, lhsExp, suffix) = let
+        fun mk (lhsExp, []) = lhsExp
+          | mk (lhsExp, (sel, membId, NONE, rpos)::rest) =
+              mk (markExp ((lpos, rpos), PT.EXP_Select(PT.MEMB(lhsExp, sel, membId))), rest)
+          | mk (lhsExp, (sel, membId, SOME args, rpos)::rest) =
+              mk (markExp ((lpos, rpos), PT.EXP_Apply(PT.MEMB(lhsExp, sel, membId), args)), rest)
+        in
+          mk (lhsExp, suffix)
+        end
+
+(* if an expression is an identifier, return the ID.  Otherwise return NONE *)
+  fun getVarId (PT.EXP_Mark{tree, ...}) = getVarId tree
+    | getVarId (PT.EXP_Var x) = SOME x
+    | getVarId _ = NONE
+
+(* self as an identifier *)
+  val self = Atom.atom "self"
+
+(* project left and right ends of a span *)
+  fun left ((lpos, _) : AntlrStreamPos.span) = lpos
+  fun right ((_, rpos) : AntlrStreamPos.span) = rpos
+
+);
+
+(* SooL tokens *)
+%tokens
+    : KW_as             ("as")
+    | KW_bool           ("bool")
+    | KW_class          ("class")
+    | KW_else           ("else")
+    | KW_extends        ("extends")
+    | KW_false          ("false")
+    | KW_if             ("if")
+    | KW_int            ("int")
+    | KW_interface      ("interface")
+    | KW_method         ("method")
+    | KW_nil            ("nil")
+    | KW_override       ("override")
+    | KW_return         ("return")
+    | KW_self           ("self")
+    | KW_string         ("string")
+    | KW_true           ("true")
+    | KW_var            ("var")
+    | KW_void           ("void")
+    | KW_while          ("while")
+    | LP                ("(")
+    | RP                (")")
+    | LCB               ("{")
+    | RCB               ("}")
+    | COLON             (":")
+    | EQ                ("=")
+    | COMMA             (",")
+    | SEMI              (";")
+    | ARROW             ("->")
+    | DOT               (".")
+    | BANG              ("!")
+    | QMARK             ("?")
+    | DQMARK            ("??")
+    | ORELSE            ("||")
+    | ANDALSO           ("&&")
+    | LT                ("<")
+    | LTE               ("<=")
+    | EQEQ              ("==")
+    | NEQ               ("!=")
+    | PLUS              ("+")
+    | MINUS             ("-")
+    | CONCAT            ("@")
+    | TIMES             ("*")
+    | DIV               ("/")
+    | ID of Atom.atom
+    | NUMBER of IntInf.int
+    | STRING of string
+    ;
+
+%start Program;
+
+Program
+        : TopDcl+
+                => (mark PT.PROGRAM (FULL_SPAN, TopDcl))
+        ;
+
+TopDcl
+        : "class" Id "(" Params ")" ExtendsClass? "{" VarDcl* MethDcl* "}"
+                => (mark PT.DCL_Mark (FULL_SPAN, PT.DCL_Class{
+                        name = Id,
+                        params = Params,
+                        super = ExtendsClass,
+                        vars = VarDcl,
+                        meths = MethDcl
+                      }))
+        | "interface" Id ( "extends" Id )? "{" MethSpc* "}"
+                => (mark PT.DCL_Mark (FULL_SPAN, PT.DCL_Interface{
+                        name = Id,
+                        extends = SR,
+                        meths = MethSpc
+                      }))
+        ;
+
+ExtendsClass
+        : "extends" Id "(" Args ")"
+                => (Id, Args)
+        ;
+
+Params
+        : (* empty *)
+                => ([])
+        | Param ( "," Param )*
+                => (Param :: SR)
+        ;
+
+Param
+        : Id ":" Typ
+                => (mark PT.PARAM_Mark (FULL_SPAN, PT.PARAM(Id, Typ)))
+        ;
+
+Typ
+        : TypeCon ("?" => ())?
+                => (if isSome SR
+                      then mark PT.TY_Mark (FULL_SPAN, PT.TY_Option TypeCon)
+                      else TypeCon)
+        ;
+
+TypeCon
+        : Id
+                => (mark PT.TY_Mark (FULL_SPAN, PT.TY_Id Id))
+        | "bool"
+                => (mark PT.TY_Mark (FULL_SPAN, PT.TY_Bool))
+        | "int"
+                => (mark PT.TY_Mark (FULL_SPAN, PT.TY_Int))
+        | "string"
+                => (mark PT.TY_Mark (FULL_SPAN, PT.TY_String))
+        ;
+
+VarDcl
+        : "var" Id ":" Typ "=" Exp
+                => (mark PT.VDCL_Mark (FULL_SPAN, PT.VDCL(Id, Typ, Exp)))
+        ;
+
+MethDcl
+        : ("override" => ())? "method" Id "(" Params ")" "->" ReturnTyp Block
+                => (mark PT.MDCL_Mark (FULL_SPAN, PT.MDCL{
+                        override = isSome SR,
+                        name = Id,
+                        params = Params,
+                        retTy = ReturnTyp,
+                        body = Block
+                      }))
+        ;
+
+MethSpc
+        : "method" Id "(" Typs ")" "->" ReturnTyp
+                => (mark PT.MSPC_Mark (FULL_SPAN, PT.MSPC{
+                        name = Id,
+                        paramTys = Typs,
+                        retTy = ReturnTyp
+                      }))
+        ;
+
+ReturnTyp
+        : Typ
+                => (Typ)
+        | "void"
+                => (mark PT.TY_Mark (FULL_SPAN, PT.TY_Void))
+        ;
+
+Typs
+        : (* empty *)
+                => ([])
+        | Typ ( "," Typ )*
+                => (Typ::SR)
+        ;
+
+Block
+        : "{" Stm* "}"
+                => (mark PT.BLK_Mark (FULL_SPAN, PT.BLK Stm))
+        ;
+
+Stm
+        : "var" Id "=" Exp ";"
+                => (markStm (FULL_SPAN, PT.STM_Var(Id, Exp)))
+        | "while" Exp Block
+                => (markStm (FULL_SPAN, PT.STM_While(Exp, Block)))
+        | IfThen ( "else" IfThen )* ( "else" Block )?
+                => (markStm (FULL_SPAN, PT.STM_If(IfThen::SR1, SR2)))
+        | "return" Exp? ";"
+                => (markStm (FULL_SPAN, PT.STM_Return Exp))
+        | Exp ( "=" Exp )? ";"
+                => (case SR
+                     of NONE => markStm (FULL_SPAN, PT.STM_Call Exp)
+                      | SOME rhs => (case getVarId Exp
+                           of SOME x => markStm (FULL_SPAN, PT.STM_VarAssign(x, rhs))
+                            | NONE => markStm (FULL_SPAN, PT.STM_FieldAssign(Exp, rhs))
+                        (* end case *))
+                    (* end case *))
+        ;
+
+IfThen
+        : "if" Exp Block
+            => ({span = FULL_SPAN, tree = (Exp, Block)})
+        ;
+
+DotSuffix
+        : Selector Id ( "(" Args ")" )?
+                => (Selector, Id, SR, right FULL_SPAN)
+        ;
+
+Selector
+        : "."   => (PT.DOT)
+        | "!"   => (PT.REQ)
+        | "?"   => (PT.OPT)
+        ;
+
+Args    : (* empty *)
+                => ([])
+        | Exp ( "," Exp )*
+                => (Exp :: SR)
+        ;
+
+Exp     : OrExp ( "??" Exp )?
+                => (case SR
+                     of NONE => OrExp
+                      | SOME rhs => mark PT.EXP_Mark (FULL_SPAN, PT.EXP_Absorb(OrExp, rhs))
+                    (* end case *))
+        ;
+
+OrExp   : AndExp ( "||" AndExp => (AndExp, right FULL_SPAN) )*
+                => (mkCondExp PT.EXP_Orelse (left AndExp_SPAN) (AndExp, SR))
+        ;
+
+AndExp  : CmpExp ( "&&" CmpExp => (CmpExp, right FULL_SPAN) )*
+                => (mkCondExp PT.EXP_Andalso (left CmpExp_SPAN) (CmpExp, SR))
+        ;
+
+CmpExp  : CatExp ( CmpOp CatExp => (CmpOp, CatExp, right CatExp_SPAN) )*
+                => (mkLBinExp (left CatExp_SPAN, CatExp, SR))
+        ;
+
+CmpOp   : "<"   => (BinOp.^<^)
+        | "<="  => (BinOp.^<=^)
+        | "=="  => (BinOp.^==^)
+        | "!="  => (BinOp.^!=^)
+        ;
+
+CatExp  : AddExp ( "@" AddExp => (BinOp.^@^, AddExp, right AddExp_SPAN) )*
+                => (mkLBinExp (left AddExp_SPAN, AddExp, SR))
+        ;
+
+AddExp  : MulExp ( AddOp MulExp => (AddOp, MulExp, right MulExp_SPAN) )*
+                => (mkLBinExp (left MulExp_SPAN, MulExp, SR))
+        ;
+
+AddOp   : "+"   => (BinOp.^+^)
+        | "-"   => (BinOp.^-^)
+        ;
+
+MulExp  : NegExp ( MulOp NegExp => (MulOp, NegExp, right NegExp_SPAN) )*
+                => (mkLBinExp (left NegExp_SPAN, NegExp, SR))
+        ;
+
+MulOp   : "*"   => (BinOp.^*^)
+        | "/"   => (BinOp.^/^)
+        ;
+
+NegExp
+        : "-" NegExp
+                => (markExp (FULL_SPAN, PT.EXP_NegOp NegExp))
+        | ReqExp
+                => (ReqExp)
+        ;
+
+ReqExp
+        : DotExp ("!" => ())?
+                => (if isSome SR
+                      then markExp (FULL_SPAN, PT.EXP_Require DotExp)
+                      else DotExp)
+        ;
+
+DotExp
+        : AtomicExp DotSuffix*
+                => (mkSelExp (left FULL_SPAN, AtomicExp, DotSuffix))
+        ;
+
+
+AtomicExp
+        : Self
+                => (markExp (FULL_SPAN, PT.EXP_Var Self))
+        | Id ( "(" Args ")" )?
+                => (case SR
+                     of NONE => markExp (FULL_SPAN, PT.EXP_Var Id)
+                      | SOME args => markExp (FULL_SPAN, PT.EXP_New(Id, args))
+                    (* end case *))
+        | Id "." "as" "(" Exp ")"
+                => (markExp (FULL_SPAN, PT.EXP_As(Id, Exp)))
+        | TypeCon "." "nil"
+                => (markExp (FULL_SPAN, PT.EXP_Nil TypeCon))
+        | NUMBER
+                => (markExp (FULL_SPAN, PT.EXP_Number NUMBER))
+        | STRING
+                => (markExp (FULL_SPAN, PT.EXP_String STRING))
+        | "true"
+                => (markExp (FULL_SPAN, PT.EXP_Bool true))
+        | "false"
+                => (markExp (FULL_SPAN, PT.EXP_Bool false))
+        | "(" Exp ")"
+                => (Exp)
+        ;
+
+Self    : "self"
+                => ({span = FULL_SPAN, tree=self})
+        ;
+
+(* marked identifiers *)
+Id      : ID
+                => ({span = ID_SPAN, tree=ID})
+        ;

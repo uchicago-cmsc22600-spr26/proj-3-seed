@@ -1,0 +1,7 @@
+anIdentifier
+/* test comments *//* another comment */
+anotherId
+/* a comment that contains a string "hello world" */
+"a string that contains a /* comment */"
+// a end-of-line comment /* that includes a nested
+comment */ // this line gets scanned as an ID, STAR, SLASH

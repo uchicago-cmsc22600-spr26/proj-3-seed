@@ -1,0 +1,14 @@
+/* this program just tests interface checking */
+
+interface B extends A {		/* error: A not declared yet */
+  method g () -> bool
+  method h (int,  int) -> A
+}
+
+interface A {
+  method f () -> void
+}
+
+class main () {  // to keep the main check happy
+  method run () -> void { return; }
+}

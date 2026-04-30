@@ -1,0 +1,18 @@
+/* this program just tests interface checking */
+
+interface A {
+  method f () -> void
+}
+
+interface B extends A {
+  method g () -> bool
+  method h (int,  int) -> A
+}
+
+interface C extends A {
+  method f () -> void /* error: redeclaration */
+}
+
+class main () {  // to keep the main check happy
+  method run () -> void { return; }
+}

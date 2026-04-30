@@ -1,0 +1,16 @@
+PROGRAM
+  [
+    DCL_Class
+      main
+      [ ]
+      <none>
+      [ ]
+      [
+        MDCL
+          run
+          [ ]
+          TY_Void
+          BLK
+            [ ]
+      ]
+  ]

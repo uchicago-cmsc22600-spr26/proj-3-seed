@@ -1,0 +1,79 @@
+/* AST: after type checking */
+interface I {
+  method f () -> void
+}
+interface J {
+  method f () -> void
+  method g () -> void
+}
+class A () {
+  method f (self : A) -> void {
+  }
+  method g (self : A) -> void {
+  }
+}
+class main () {
+  method run (self : main) -> void {
+  }
+  method eq01 (self : main, a : bool, b : bool) -> bool {
+    return (a '==' b);
+  }
+  method eq02 (self : main, a : int, b : int) -> bool {
+    return (a '==' b);
+  }
+  method eq03 (self : main, a : string, b : string) -> bool {
+    return (a '==' b);
+  }
+  method eq04 (self : main, a : bool?, b : bool?) -> bool {
+    return (a '==' b);
+  }
+  method eq05 (self : main, a : int?, b : int?) -> bool {
+    return (a '==' b);
+  }
+  method eq06 (self : main, a : string?, b : string?) -> bool {
+    return (a '==' b);
+  }
+  method eq07 (self : main, a : bool?, b : bool) -> bool {
+    return (a '==' b);
+  }
+  method eq08 (self : main, a : int, b : int?) -> bool {
+    return (a '==' b);
+  }
+  method eq09 (self : main, a : string?, b : string) -> bool {
+    return (a '==' b);
+  }
+  method eq10 (self : main, a : A, b : A) -> bool {
+    return (a '==' b);
+  }
+  method eq11 (self : main, a : A, b : J) -> bool {
+    return (a '==' b);
+  }
+  method eq12 (self : main, a : A, b : I) -> bool {
+    return (a '==' b);
+  }
+  method eq13 (self : main, a : A?, b : A?) -> bool {
+    return (a '==' b);
+  }
+  method eq14 (self : main, a : A, b : A?) -> bool {
+    return (a '==' b);
+  }
+  method eq16 (self : main, a : A, b : J?) -> bool {
+    return (a '==' b);
+  }
+  method eq17 (self : main, a : A?, b : J?) -> bool {
+    return (a '==' b);
+  }
+  method eq18 (self : main, a : I, b : I) -> bool {
+    return (a '==' b);
+  }
+  method eq19 (self : main, a : I, b : J) -> bool {
+    return (a '==' b);
+  }
+  method eq20 (self : main, a : I?, b : I) -> bool {
+    return (a '==' b);
+  }
+  method eq21 (self : main, a : I?, b : I?) -> bool {
+    return (a '==' b);
+  }
+}
+/* Program end */

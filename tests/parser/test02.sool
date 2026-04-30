@@ -1,0 +1,6 @@
+// test02.sool
+//
+
+class main () {
+  method run () -> void { }
+}
