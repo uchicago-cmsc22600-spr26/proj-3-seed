@@ -28,6 +28,11 @@ structure Eval : sig
   (* exception used to signal a runtime error *)
     exception RuntimeError = DE.RuntimeError
 
+  (* the first two slots of the metadata are the object size and super-class.  These
+   * are not included in the metadata item array, so we need to adjust offsets.
+   *)
+    val mdOffset = 2
+
     fun handleExn (env, RuntimeError msg) = Runtime.failure msg
       | handleExn (env, ex) = Runtime.failure(concat["uncaught exception ", exnName ex])
 
@@ -139,7 +144,7 @@ structure Eval : sig
                 (* end case *))
             | IR.MetaSel(v, (name, ix)) => (case evalValue(env, v)
                  of V.META(IR.CLASS{metadata, ...}) => (
-                      case nth(env, metadata, ix-1, "metadata selection is out of bounds")
+                      case nth(env, metadata, ix-mdOffset, "metadata selection is out of bounds")
                        of IR.FuncItem f => V.FUNC f
                         | IR.IndexItem iTbl => V.INDEX iTbl
                       (* end case *))
@@ -153,7 +158,7 @@ structure Eval : sig
             | IR.IndexSel(v, ix) => (case evalValue(env, v)
                  of V.META(IR.CLASS{metadata, ...}) => (case evalValue(env, ix)
                        of V.INT ix => (
-                            case nth(env, metadata, Int.fromLarge(ix)-1,
+                            case nth(env, metadata, Int.fromLarge(ix)-mdOffset,
                                 "metadata selection is out of bounds")
                              of IR.FuncItem f => V.FUNC f
                               | IR.IndexItem idx => V.INDEX idx
@@ -250,4 +255,3 @@ structure Eval : sig
           end
 
   end
-

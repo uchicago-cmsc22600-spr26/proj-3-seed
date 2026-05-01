@@ -99,7 +99,7 @@ structure Interp : sig
     fun usage () = (
           TextIO.output(TextIO.stdErr, String.concat[
               "usage: ", CommandLine.name(),
-              " [--trace] [--step-limit=<n>] [--depth-limit=<n>] <file>\n"
+              " [--trace] [--step-limit <n>] [--depth-limit <n>] [--print <file>] <src-file>\n"
             ]);
           OS.Process.exit OS.Process.failure)
 

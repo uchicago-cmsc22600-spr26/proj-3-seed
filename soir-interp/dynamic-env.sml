@@ -178,14 +178,30 @@ structure DynamicEnv : sig
                 ])
           (* end case *))
 
-    fun traceStm (Env{gInfo=GInfo{ctls, step, lastStm, ...}, ...}, stm) = (
+    fun traceStm (Env{gInfo=GInfo{ctls, step, lastStm, ...}, vEnv}, stm) = (
           lastStm := stm;
           step := !step + 1;
           if #trace ctls
-            then print(concat[
-                StringCvt.padLeft #" " 4 (Int.toString (!step)), ": ",
-                Util.stmToString stm, "\n"
-              ])
+            then let
+              (* the values of the local variables used by the statement *)
+              val vars = (case Util.varsOfStm stm
+                     of [] => ""
+                      | xs => let
+                          val v2s = V.toString' 2
+                          fun var2s x = (case VMap.find(vEnv, x)
+                                 of SOME v => concat[SOIRVar.nameOf x, "=", v2s(!v)]
+                                  | NONE => SOIRVar.nameOf x ^ " UNBOUND"
+                                (* end case *))
+                          in
+                            " ;; " ^ String.concatWithMap ", " var2s xs
+                          end
+                    (* end case *))
+              in
+                print(concat[
+                    StringCvt.padLeft #" " 4 (Int.toString (!step)), ": ",
+                    StringCvt.padRight #" " 50 (Util.stmToString stm), vars, "\n"
+                  ])
+              end
             else ();
           if (!step >= #stepLimit ctls)
             then raise RuntimeError "step limit exceeded"

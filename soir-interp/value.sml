@@ -28,10 +28,13 @@ structure Value =
       | FUNC of IR.func
       | META of IR.class
       | INDEX of IR.index_table
-      | OBJ of t array               (* location 0 will be class metadata *)
+      | OBJ of t array                  (* location 0 will be class metadata *)
       | TUPLE of t list
 
-    fun toString v = let
+    (* return the string representation of the value `v`.  The integer `d` limits
+     * the depth of the printing.
+     *)
+    fun toString' d v = let
           fun toS (OBJ _, 0) = "<object>"
             | toS (TUPLE _, 0) = "<tuple>"
             | toS (UNDEF, _) = "<undefined>"
@@ -49,11 +52,13 @@ structure Value =
                   "{", String.concatWithMap "," (fn v => toS(v, d-1)) (Array.toList arr), "}"
                 ]
             | toS (TUPLE tpl, d) = String.concat[
-                  "<", String.concatWithMap "," (fn v => toS(v, d-1)) tpl, ">"
+                  "(", String.concatWithMap "," (fn v => toS(v, d-1)) tpl, ")"
                 ]
           in
-            toS (v, 5)
+            toS (v, d)
           end
+
+    val toString = toString' 5
 
     end (* local *)
 
