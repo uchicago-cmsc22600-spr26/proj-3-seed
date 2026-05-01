@@ -1,0 +1,7 @@
+/* test multiplication */
+class main () {
+  method mul (a : int, b : int) -> int { return a*b; }
+  method run () -> void {
+    system.print("7 * 6 =   "); system.print(self.mul(7, 6)); system.print("\n");
+  }
+}

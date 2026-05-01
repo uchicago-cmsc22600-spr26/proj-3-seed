@@ -1,0 +1,14 @@
+/* test string equality */
+class main () {
+  method eq (a : string, b : string) -> bool { return (a == b); }
+  method neq (a : string, b : string) -> bool { return (a != b); }
+  method isNil (a : string?) -> bool { return (a == string.nil); }
+  method run () -> void {
+    system.print("(hi == hi)    = " @ self.eq("hi", "hi").toString() @"\n");
+    system.print("(hi == world) = " @ self.eq("hi", "world").toString() @"\n");
+    system.print("(hi != hi)    = " @ self.neq("hi", "hi").toString() @"\n");
+    system.print("(hi != world) = " @ self.neq("hi", "world").toString() @"\n");
+    system.print("(nil == nil)  = " @ self.isNil(string.nil).toString() @"\n");
+    system.print("(hi == nil)   = " @ self.isNil("hi").toString() @"\n");
+  }
+}

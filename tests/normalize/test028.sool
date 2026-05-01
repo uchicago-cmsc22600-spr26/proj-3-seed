@@ -1,0 +1,14 @@
+/* test integer equality */
+class main () {
+  method eq (a : int, b : int) -> bool { return (a == b); }
+  method neq (a : int, b : int) -> bool { return (a != b); }
+  method isNil (a : int?) -> bool { return (a == int.nil); }
+  method run () -> void {
+    system.print("(17 == 17)   = " @ self.eq(17, 17).toString() @"\n");
+    system.print("(17 == 42)   = " @ self.eq(17, 42).toString() @"\n");
+    system.print("(17 != 17)   = " @ self.neq(17, 17).toString() @"\n");
+    system.print("(17 != 42)   = " @ self.neq(17, 42).toString() @"\n");
+    system.print("(nil == nil) = " @ self.isNil(int.nil).toString() @"\n");
+    system.print("(17 == nil)  = " @ self.isNil(17).toString() @"\n");
+  }
+}

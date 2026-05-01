@@ -1,0 +1,360 @@
+/* SOIR: after normalization */
+class colorPoint extends point{
+  [  1] var x : int 
+  [  2] var y : int 
+  [  3] var c : string 
+  metadata {
+    [  0] 4
+    [  1] point
+    [  2] point.toFast
+    [  3] point.add
+    [  4] point.move
+    [  5] point.y
+    [  6] point.x
+    [  7] colorPoint.color
+  }
+}
+class fastPoint extends point{
+  [  1] var x : int 
+  [  2] var y : int 
+  metadata {
+    [  0] 3
+    [  1] point
+    [  2] point.toFast
+    [  3] point.add
+    [  4] fastPoint.move
+    [  5] point.y
+    [  6] point.x
+  }
+}
+class point {
+  [  1] var x : int 
+  [  2] var y : int 
+  metadata {
+    [  0] 3
+    [  1] nil
+    [  2] point.toFast
+    [  3] point.add
+    [  4] point.move
+    [  5] point.y
+    [  6] point.x
+  }
+}
+class __System__ {
+  metadata {
+    [  0] 1
+    [  1] nil
+    [  2] __System__.print
+    [  3] __System__.input
+    [  4] __System__.fail
+    [  5] __System__.exit
+  }
+}
+class __String__ {
+  [  1] var value : string 
+  metadata {
+    [  0] 2
+    [  1] nil
+    [  2] __String__.toString
+    [  3] __String__.toInt
+    [  4] __String__.substring
+    [  5] __String__.length
+    [  6] __String__.charAt
+    [  7] __String__@toStringI
+  }
+}
+class main {
+  metadata {
+    [  0] 1
+    [  1] nil
+    [  2] main.run
+    [  3] main.println
+  }
+}
+class __Bool__ {
+  [  1] var value : bool 
+  metadata {
+    [  0] 2
+    [  1] nil
+    [  2] __Bool__.toString
+    [  3] __Bool__.not
+  }
+}
+class __Int__ {
+  [  1] var value : int 
+  metadata {
+    [  0] 2
+    [  1] nil
+    [  2] __Int__.toString
+    [  3] __Int__.char
+    [  4] __Int__@toStringI
+  }
+}
+index_table __String__@toStringI {
+  [  0] toString: @2
+}
+index_table __Int__@toStringI {
+  [  0] toString: @2
+}
+fun __System__.print (self_008D : object, arg_008E : <object,index_table>) -> void {
+  var obj_008F : object = #1(arg_008E);
+  var index_0090 : index_table = #2(arg_008E);
+  var md_0091 : class_metadata = obj_008F._md;
+  var ix_0092 : int = index_0090::toString @0;
+  var toString_0093 : (object)->string = md_0091[ix_0092];
+  var s_0094 : string = toString_0093 (obj_008F)
+  _sool_print (s_0094)
+  return;
+}
+fun __System__.input (self_008A : object) -> string? {
+  var res_008B : string? = _sool_input ()
+  return res_008B;
+}
+fun __System__.fail (self_0087 : object, msg_0088 : string) -> void {
+  _sool_fail (msg_0088)
+  return;
+}
+fun __System__.exit (self_0085 : object) -> void {
+  _sool_exit ()
+  return;
+}
+fun __String__.toString (self_0081 : object) -> string {
+  var value_0083 : string = self_0081.value;
+  return value_0083;
+}
+fun __String__.toInt (self_007D : object) -> int? {
+  var value_007F : string = self_007D.value;
+  var res_007E : int? = _sool_string_to_int (value_007F)
+  return res_007E;
+}
+fun __String__.substring (self_0077 : object, i_0078 : int, n_0079 : int) -> string {
+  var value_007B : string = self_0077.value;
+  var res_007A : string = _sool_substring (value_007B, i_0078, n_0079)
+  return res_007A;
+}
+fun __String__.length (self_0073 : object) -> int {
+  var value_0075 : string = self_0073.value;
+  var res_0074 : int = _sool_string_length (value_0075)
+  return res_0074;
+}
+fun __String__.charAt (self_006E : object, ix_006F : int) -> int {
+  var value_0071 : string = self_006E.value;
+  var res_0070 : int = _sool_char_at (value_0071, ix_006F)
+  return res_0070;
+}
+fun __Int__.toString (self_006A : object) -> string {
+  var value_006C : int = self_006A.value;
+  var res_006B : string = _sool_int_to_string (value_006C)
+  return res_006B;
+}
+fun __Int__.char (self_0066 : object) -> string {
+  var value_0068 : int = self_0066.value;
+  var res_0067 : string = _sool_int_to_char (value_0068)
+  return res_0067;
+}
+fun __Bool__.toString (self_0062 : object) -> string {
+  var value_0064 : bool = self_0062.value;
+  var res_0063 : string = _sool_bool_to_string (value_0064)
+  return res_0063;
+}
+fun __Bool__.not (self_005E : object) -> bool {
+  var value_005F : bool = self_005E.value;
+  var res_0060 : bool = BoolNot (value_005F);
+  return res_0060;
+}
+fun init___Bool__ (self_0097 : object, p0_0096 : bool) -> void {
+  self_0097.value := p0_0096;
+  return;
+}
+fun init___Int__ (self_009A : object, p0_0099 : int) -> void {
+  self_009A.value := p0_0099;
+  return;
+}
+fun init___String__ (self_009D : object, p0_009C : string) -> void {
+  self_009D.value := p0_009C;
+  return;
+}
+fun point.x (self_009F : object) -> int {
+  var t_00A0 : int = self_009F.x;
+  return t_00A0;
+}
+fun point.y (self_00A2 : object) -> int {
+  var t_00A3 : int = self_00A2.y;
+  return t_00A3;
+}
+fun point.move (self_00A7 : object, dx_00A6 : int, dy_00A5 : int) -> void {
+  var t_00A8 : int = self_00A7.x;
+  self_00A7.x := IntAdd (t_00A8, dx_00A6);
+  var t_00A9 : int = self_00A7.y;
+  self_00A7.y := IntAdd (t_00A9, dy_00A5);
+  return;
+}
+fun point.add (self_00AC : object, pt_00AB : object) -> object {
+  var t_00AD : int = pt_00AB.x;
+  var t_00AE : int = pt_00AB.y;
+  var md_00AF : class_metadata = self_00AC._md;
+  var fptr_00B0 : (object,int,int)->void = md_00AF::point.move @4;
+  fptr_00B0 (self_00AC, t_00AD, t_00AE)
+  return self_00AC;
+}
+fun point.toFast (self_00B2 : object) -> object {
+  var absorbExp_00B3 : object;
+  var asRes_00B4 : object?;
+  var is_cls_00B5 : class_metadata = _sool_instance_of (self_00B2, fastPoint)
+  if is_cls_00B5 then {
+    asRes_00B4 := self_00B2;
+  }
+  else {
+    asRes_00B4 := nil;
+  }
+  var isNil_00B8 : bool = isNil (asRes_00B4);
+  if isNil_00B8 then {
+    var t_00B9 : int = self_00B2.x;
+    var t_00BA : int = self_00B2.y;
+    var obj_00BB : object = new fastPoint
+    init_fastPoint (obj_00BB, t_00B9, t_00BA)
+    absorbExp_00B3 := obj_00BB;
+  }
+  else {
+    absorbExp_00B3 := asRes_00B4;
+  }
+  return absorbExp_00B3;
+}
+fun init_point (self_00C1 : object, x_00C0 : int, y_00BF : int) -> void {
+  self_00C1.x := x_00C0;
+  self_00C1.y := y_00BF;
+  return;
+}
+fun colorPoint.color (self_00C3 : object) -> string {
+  var t_00C4 : string = self_00C3.c;
+  return t_00C4;
+}
+fun init_colorPoint (self_00C9 : object, x_00C8 : int, y_00C7 : int, c_00C6 : string) -> void {
+  init_point (self_00C9, x_00C8, y_00C7)
+  self_00C9.c := c_00C6;
+  return;
+}
+fun fastPoint.move (self_00CD : object, dx_00CC : int, dy_00CB : int) -> void {
+  var t_00CE : int = self_00CD.x;
+  var t_00CF : int = IntMul (2, dx_00CC);
+  self_00CD.x := IntAdd (t_00CE, t_00CF);
+  var t_00D0 : int = self_00CD.y;
+  var t_00D1 : int = IntMul (2, dy_00CB);
+  self_00CD.y := IntAdd (t_00D0, t_00D1);
+  return;
+}
+fun init_fastPoint (self_00D5 : object, x_00D4 : int, y_00D3 : int) -> void {
+  init_point (self_00D5, x_00D4, y_00D3)
+  return;
+}
+fun main.println (self_00D9 : object, s_00D8 : string, n_00D7 : int) -> void {
+  var obj_00DA : object = new __String__
+  init___String__ (obj_00DA, s_00D8)
+  var tpl_00DB : <object,index_table> = <obj_00DA, __String__@toStringI>
+  var t_00DC : <object,index_table> = tpl_00DB;
+  var md_00DD : class_metadata = _sool_system_000F._md;
+  var fptr_00DE : (object,<object,index_table>)->void = md_00DD::__System__.print @2;
+  fptr_00DE (_sool_system_000F, t_00DC)
+  var obj_00DF : object = new __Int__
+  init___Int__ (obj_00DF, n_00D7)
+  var tpl_00E0 : <object,index_table> = <obj_00DF, __Int__@toStringI>
+  var t_00E1 : <object,index_table> = tpl_00E0;
+  var md_00E2 : class_metadata = _sool_system_000F._md;
+  var fptr_00E3 : (object,<object,index_table>)->void = md_00E2::__System__.print @2;
+  fptr_00E3 (_sool_system_000F, t_00E1)
+  var obj_00E4 : object = new __String__
+  init___String__ (obj_00E4, "\n")
+  var tpl_00E5 : <object,index_table> = <obj_00E4, __String__@toStringI>
+  var t_00E6 : <object,index_table> = tpl_00E5;
+  var md_00E7 : class_metadata = _sool_system_000F._md;
+  var fptr_00E8 : (object,<object,index_table>)->void = md_00E7::__System__.print @2;
+  fptr_00E8 (_sool_system_000F, t_00E6)
+  return;
+}
+fun main.run (self_00EA : object) -> void {
+  var obj_00EB : object = new point
+  init_point (obj_00EB, 17, 42)
+  var md_00EC : class_metadata = obj_00EB._md;
+  var fptr_00ED : (object)->int = md_00EC::point.y @5;
+  var res_00EE : int = fptr_00ED (obj_00EB)
+  var md_00EF : class_metadata = self_00EA._md;
+  var fptr_00F0 : (object,string,int)->void = md_00EF::main.println @3;
+  fptr_00F0 (self_00EA, "42 = ", res_00EE)
+  var obj_00F1 : object = new point
+  init_point (obj_00F1, 13, 12)
+  var md_00F2 : class_metadata = obj_00EB._md;
+  var fptr_00F3 : (object,object)->object = md_00F2::point.add @3;
+  var res_00F4 : object = fptr_00F3 (obj_00EB, obj_00F1)
+  var md_00F5 : class_metadata = res_00F4._md;
+  var fptr_00F6 : (object)->int = md_00F5::point.y @5;
+  var res_00F7 : int = fptr_00F6 (res_00F4)
+  var md_00F8 : class_metadata = self_00EA._md;
+  var fptr_00F9 : (object,string,int)->void = md_00F8::main.println @3;
+  fptr_00F9 (self_00EA, "54 = ", res_00F7)
+  var obj_00FA : object = new colorPoint
+  init_colorPoint (obj_00FA, 17, 42, "red")
+  var md_00FB : class_metadata = obj_00FA._md;
+  var fptr_00FC : (object)->int = md_00FB::point.y @5;
+  var res_00FD : int = fptr_00FC (obj_00FA)
+  var md_00FE : class_metadata = self_00EA._md;
+  var fptr_00FF : (object,string,int)->void = md_00FE::main.println @3;
+  fptr_00FF (self_00EA, "42 = ", res_00FD)
+  var obj_0100 : object = new fastPoint
+  init_fastPoint (obj_0100, 0, 0)
+  var obj_0101 : object = new point
+  init_point (obj_0101, 17, 42)
+  var md_0102 : class_metadata = obj_0100._md;
+  var fptr_0103 : (object,object)->object = md_0102::point.add @3;
+  var res_0104 : object = fptr_0103 (obj_0100, obj_0101)
+  var md_0105 : class_metadata = res_0104._md;
+  var fptr_0106 : (object)->int = md_0105::point.y @5;
+  var res_0107 : int = fptr_0106 (res_0104)
+  var md_0108 : class_metadata = self_00EA._md;
+  var fptr_0109 : (object,string,int)->void = md_0108::main.println @3;
+  fptr_0109 (self_00EA, "84 = ", res_0107)
+  var obj_010A : object = new point
+  init_point (obj_010A, 0, 0)
+  var md_010B : class_metadata = obj_010A._md;
+  var fptr_010C : (object)->object = md_010B::point.toFast @2;
+  var res_010D : object = fptr_010C (obj_010A)
+  var obj_010E : object = new point
+  init_point (obj_010E, 17, 42)
+  var md_010F : class_metadata = res_010D._md;
+  var fptr_0110 : (object,object)->object = md_010F::point.add @3;
+  var res_0111 : object = fptr_0110 (res_010D, obj_010E)
+  var md_0112 : class_metadata = res_0111._md;
+  var fptr_0113 : (object)->int = md_0112::point.y @5;
+  var res_0114 : int = fptr_0113 (res_0111)
+  var md_0115 : class_metadata = self_00EA._md;
+  var fptr_0116 : (object,string,int)->void = md_0115::main.println @3;
+  fptr_0116 (self_00EA, "84 = ", res_0114)
+  var obj_0117 : object = new fastPoint
+  init_fastPoint (obj_0117, 0, 0)
+  var md_0118 : class_metadata = obj_0117._md;
+  var fptr_0119 : (object)->object = md_0118::point.toFast @2;
+  var res_011A : object = fptr_0119 (obj_0117)
+  var obj_011B : object = new point
+  init_point (obj_011B, 17, 42)
+  var md_011C : class_metadata = res_011A._md;
+  var fptr_011D : (object,object)->object = md_011C::point.add @3;
+  var res_011E : object = fptr_011D (res_011A, obj_011B)
+  var md_011F : class_metadata = res_011E._md;
+  var fptr_0120 : (object)->int = md_011F::point.y @5;
+  var res_0121 : int = fptr_0120 (res_011E)
+  var md_0122 : class_metadata = self_00EA._md;
+  var fptr_0123 : (object,string,int)->void = md_0122::main.println @3;
+  fptr_0123 (self_00EA, "84 = ", res_0121)
+  return;
+}
+fun init_main (self_0125 : object) -> void {
+  return;
+}
+fun _sool_main () -> void {
+  var obj_0127 : object = new main
+  init_main (obj_0127)
+  var md_0128 : class_metadata = obj_0127._md;
+  var run_0129 : (object)->void = md_0128::main.run @2;
+  run_0129 (obj_0127)
+  return;
+}
+/* Program end */

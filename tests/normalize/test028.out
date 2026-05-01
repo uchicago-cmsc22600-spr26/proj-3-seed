@@ -1,0 +1,6 @@
+(17 == 17)   = true
+(17 == 42)   = false
+(17 != 17)   = false
+(17 != 42)   = true
+(nil == nil) = true
+(17 == nil)  = false

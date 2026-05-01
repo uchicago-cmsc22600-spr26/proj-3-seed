@@ -1,0 +1,67 @@
+/* test BST implemented with visitor pattern */
+
+// base class of trees
+class BT () {
+  method asNode () -> BTNode? { return BTNode.nil; }
+  method asLeaf () -> BTLeaf? { return BTLeaf.nil; }
+  method insert (x : int) -> BT { system.fail ("BT.insert"); return self; }
+  method member (x : int) -> bool { system.fail ("BT.member"); return false; }
+}
+
+// leaves
+class BTLeaf () extends BT() {
+  override method asLeaf () -> BTLeaf? { return self; }
+  override method insert (x : int) -> BT {
+    return BTNode (x);
+  }
+  override method member (x : int) -> bool { return false; }
+}
+
+// interior nodes
+class BTNode (x : int) extends BT() {
+  var value : int = x
+  var left : BT = BTLeaf()
+  var right : BT = BTLeaf()
+  override method asNode () -> BTNode? { return self; }
+  override method insert (x : int) -> BT {
+    if (x < self.value) {
+      self.left = self.left.insert (x);
+    }
+    else if (self.value < x) {
+      self.right = self.right.insert (x);
+    }
+    return self;
+  }
+  override method member (x : int) -> bool {
+    if (self.value < x) {
+      return self.right.member (x);
+    } else if (x < self.value) {
+      return self.left.member (x);
+    } else {
+      return true;
+    }
+  }
+}
+
+class main () {
+  method pr (bst : BT, x : int) -> void {
+    system.print ("member(" @ x.toString() @ ") = " @ bst.member(x).toString() @ "\n");
+  }
+  method run () -> void {
+    var bst = BT();
+    bst = BTLeaf();
+    bst = bst.insert (42);
+    bst = bst.insert (17);
+    bst = bst.insert (5);
+    bst = bst.insert (-6);
+    bst = bst.insert (5);
+  /* here the set should be {-6, 5, 17, 42} */
+    self.pr (bst, 1); // false
+    self.pr (bst, -7); // false
+    self.pr (bst, 5); // true
+    self.pr (bst, 42); // true
+    self.pr (bst, 43); // false
+    self.pr (bst, 17); // true
+    self.pr (bst, -6); // true
+  }
+}

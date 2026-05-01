@@ -1,0 +1,10 @@
+A_f(a) =         A.f
+A_f(b) =         B.f
+I_f(b) =         B.f
+I_g(b) =         B.g
+J_g(b) =         B.g
+J_g(I_to_J(b)) = B.g
+K_f(a) =         A.f
+K_f(b) =         B.f
+K_f(c) =         C.f
+K_f(I_to_K(b)) = B.f

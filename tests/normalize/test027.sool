@@ -1,0 +1,19 @@
+/* test boolean equality */
+class main () {
+  method eq (a : bool, b : bool) -> bool { return (a == b); }
+  method neq (a : bool, b : bool) -> bool { return (a != b); }
+  method isNil (a : bool?) -> bool { return (a == bool.nil); }
+  method run () -> void {
+    system.print("(false == false) = " @ self.eq(false, false).toString() @"\n");
+    system.print("(false == true)  = " @ self.eq(false, true).toString() @"\n");
+    system.print("(true == false)  = " @ self.eq(true, false).toString() @"\n");
+    system.print("(true == true)   = " @ self.eq(true, true).toString() @"\n");
+    system.print("(false != false) = " @ self.neq(false, false).toString() @"\n");
+    system.print("(false != true)  = " @ self.neq(false, true).toString() @"\n");
+    system.print("(true != false)  = " @ self.neq(true, false).toString() @"\n");
+    system.print("(true != true)   = " @ self.neq(true, true).toString() @"\n");
+    system.print("(nil == nil)     = " @ self.isNil(bool.nil).toString() @"\n");
+    system.print("(nil == false)   = " @ self.isNil(false).toString() @"\n");
+    system.print("(nil == true)    = " @ self.isNil(true).toString() @"\n");
+  }
+}

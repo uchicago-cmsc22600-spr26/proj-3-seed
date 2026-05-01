@@ -19,7 +19,6 @@ class __String__ {
     [  4] __String__.substring
     [  5] __String__.length
     [  6] __String__.charAt
-    [  7] __String__@toStringI
   }
 }
 class main {
@@ -45,9 +44,10 @@ class __Int__ {
     [  1] nil
     [  2] __Int__.toString
     [  3] __Int__.char
+    [  4] __Int__@toStringI
   }
 }
-index_table __String__@toStringI {
+index_table __Int__@toStringI {
   [  0] toString: @2
 }
 fun __System__.print (self_006A : object, arg_006B : <object,index_table>) -> void {
@@ -129,9 +129,9 @@ fun init___String__ (self_007A : object, p0_0079 : string) -> void {
   return;
 }
 fun main.run (self_007C : object) -> void {
-  var obj_007D : object = new __String__
-  init___String__ (obj_007D, "hello\n")
-  var tpl_007E : <object,index_table> = <obj_007D, __String__@toStringI>
+  var obj_007D : object = new __Int__
+  init___Int__ (obj_007D, 42)
+  var tpl_007E : <object,index_table> = <obj_007D, __Int__@toStringI>
   var t_007F : <object,index_table> = tpl_007E;
   var md_0080 : class_metadata = _sool_system_000F._md;
   var fptr_0081 : (object,<object,index_table>)->void = md_0080::__System__.print @2;

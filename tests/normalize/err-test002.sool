@@ -1,0 +1,15 @@
+/* test that required variable selection signals an error on nil */
+
+class A () {
+  method print () -> void { system.print ("hello\n"); }
+}
+class B (a : A?) {
+  var a : A? = a
+  method print () -> void { self.a!print(); }
+}
+class main () {
+  var b : B = B(A.nil)
+  method run () -> void {
+    self.b.print();  // should fail
+  }
+}

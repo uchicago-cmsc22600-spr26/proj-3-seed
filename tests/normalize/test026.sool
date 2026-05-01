@@ -1,0 +1,17 @@
+/* class-to-interface coercions */
+
+class A () {
+  method toString () -> string { return "hello\n"; }
+}
+
+class B (x : toStringI) {
+  var s : string = x.toString()
+  method pr () -> void { system.print (self.s); }
+}
+
+class main () {
+  method run () -> void {
+    var x = B(A());
+    x.pr();
+  }
+}

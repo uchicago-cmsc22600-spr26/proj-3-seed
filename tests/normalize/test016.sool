@@ -1,0 +1,28 @@
+/* test order of evaluation of function arguments */
+class Id () {
+  var cnt : int = 0
+  method prefix () -> void {
+    system.print(self.cnt.toString() @ ": ");
+    self.cnt = self.cnt + 1;
+  }
+  method idString (x : string) -> string {
+    self.prefix(); system.print(x.toString() @ "\n"); return x;
+  }
+  method idBool (x : bool) -> bool {
+    self.prefix(); system.print(x.toString() @ "\n"); return x;
+  }
+  method idInt (x : int) -> int {
+    self.prefix(); system.print(x.toString() @ "\n"); return x;
+  }
+}
+
+class main () {
+  method f (a : int, b : int, c : int) -> bool {
+    return (a * b == c);
+  }
+  method run () -> void {
+    var id = Id();
+    var ans = self.f(id.idInt(3) * id.idInt(2), id.idInt(4) + id.idInt(3), id.idInt(42));
+    system.print("the answer is = " @ ans.toString() @ "\n");
+  }
+}

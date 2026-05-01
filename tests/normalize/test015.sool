@@ -1,0 +1,26 @@
+/* test order of evaluation of arithmetic */
+class Id () {
+  var cnt : int = 0
+  method prefix () -> void {
+    system.print(self.cnt.toString() @ ": ");
+    self.cnt = self.cnt + 1;
+  }
+  method idString (x : string) -> string {
+    self.prefix(); system.print(x.toString() @ "\n"); return x;
+  }
+  method idBool (x : bool) -> bool {
+    self.prefix(); system.print(x.toString() @ "\n"); return x;
+  }
+  method idInt (x : int) -> int {
+    self.prefix(); system.print(x.toString() @ "\n"); return x;
+  }
+}
+
+class main () {
+  method run () -> void {
+    var id = Id();
+    var x = id.idBool(id.idInt(3) * id.idInt(2) * (id.idInt(4) + id.idInt(3)) == id.idInt(42));
+    system.print(
+      id.idString("the answer is = ") @ id.idString(x.toString()) @ id.idString("\n"));
+  }
+}

@@ -1,0 +1,28 @@
+/* test require operator */
+class A () {
+  var s : string = "uninitialized"
+  var x : A? = A.nil
+  method init () -> void {
+    self.s = "initialized";
+    self.x = self;
+  }
+  method getX () -> A? { return self.x; }
+  method getS () -> string { return self.s; }
+}
+
+class main () {
+  method pr (x : A?) -> void {
+    if (x == A.nil) {
+      system.print("nil");
+    }
+    else {
+      system.print(x!getS());
+    }
+  }
+  method run () -> void {
+    var a = A();
+    system.print("a.getX() = "); self.pr(a.getX()); system.print ("\n");
+    a.init();
+    system.print("a.getX() = "); self.pr(a.getX()); system.print ("\n");
+  }
+}

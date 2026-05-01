@@ -1,0 +1,7 @@
+/* test subtraction */
+class main () {
+  method sub (a : int, b : int) -> int { return a-b; }
+  method run () -> void {
+    system.print("45 - 3 =  "); system.print(self.sub(45, 3)); system.print("\n");
+  }
+}

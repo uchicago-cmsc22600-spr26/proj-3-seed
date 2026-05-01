@@ -1,0 +1,382 @@
+/* SOIR: after normalization */
+class __System__ {
+  metadata {
+    [  0] 1
+    [  1] nil
+    [  2] __System__.print
+    [  3] __System__.input
+    [  4] __System__.fail
+    [  5] __System__.exit
+  }
+}
+class __String__ {
+  [  1] var value : string 
+  metadata {
+    [  0] 2
+    [  1] nil
+    [  2] __String__.toString
+    [  3] __String__.toInt
+    [  4] __String__.substring
+    [  5] __String__.length
+    [  6] __String__.charAt
+    [  7] __String__@toStringI
+  }
+}
+class main {
+  metadata {
+    [  0] 1
+    [  1] nil
+    [  2] main.run
+    [  3] main.pr
+  }
+}
+class __Bool__ {
+  [  1] var value : bool 
+  metadata {
+    [  0] 2
+    [  1] nil
+    [  2] __Bool__.toString
+    [  3] __Bool__.not
+    [  4] __Bool__@boolI
+  }
+}
+class BTNode extends BT{
+  [  1] var value : int 
+  [  2] var left : object 
+  [  3] var right : object 
+  metadata {
+    [  0] 4
+    [  1] BT
+    [  2] BTNode.member
+    [  3] BTNode.insert
+    [  4] BT.asLeaf
+    [  5] BTNode.asNode
+  }
+}
+class BTLeaf extends BT{
+  metadata {
+    [  0] 1
+    [  1] BT
+    [  2] BTLeaf.member
+    [  3] BTLeaf.insert
+    [  4] BTLeaf.asLeaf
+    [  5] BT.asNode
+  }
+}
+class BT {
+  metadata {
+    [  0] 1
+    [  1] nil
+    [  2] BT.member
+    [  3] BT.insert
+    [  4] BT.asLeaf
+    [  5] BT.asNode
+  }
+}
+class __Int__ {
+  [  1] var value : int 
+  metadata {
+    [  0] 2
+    [  1] nil
+    [  2] __Int__.toString
+    [  3] __Int__.char
+    [  4] __Int__@intI
+  }
+}
+index_table __String__@toStringI {
+  [  0] toString: @2
+}
+index_table __Bool__@boolI {
+  [  0] not: @3
+  [  1] toString: @2
+}
+index_table __Int__@intI {
+  [  0] char: @3
+  [  1] toString: @2
+}
+fun __System__.print (self_008F : object, arg_0090 : <object,index_table>) -> void {
+  var obj_0091 : object = #1(arg_0090);
+  var index_0092 : index_table = #2(arg_0090);
+  var md_0093 : class_metadata = obj_0091._md;
+  var ix_0094 : int = index_0092::toString @0;
+  var toString_0095 : (object)->string = md_0093[ix_0094];
+  var s_0096 : string = toString_0095 (obj_0091)
+  _sool_print (s_0096)
+  return;
+}
+fun __System__.input (self_008C : object) -> string? {
+  var res_008D : string? = _sool_input ()
+  return res_008D;
+}
+fun __System__.fail (self_0089 : object, msg_008A : string) -> void {
+  _sool_fail (msg_008A)
+  return;
+}
+fun __System__.exit (self_0087 : object) -> void {
+  _sool_exit ()
+  return;
+}
+fun __String__.toString (self_0083 : object) -> string {
+  var value_0085 : string = self_0083.value;
+  return value_0085;
+}
+fun __String__.toInt (self_007F : object) -> int? {
+  var value_0081 : string = self_007F.value;
+  var res_0080 : int? = _sool_string_to_int (value_0081)
+  return res_0080;
+}
+fun __String__.substring (self_0079 : object, i_007A : int, n_007B : int) -> string {
+  var value_007D : string = self_0079.value;
+  var res_007C : string = _sool_substring (value_007D, i_007A, n_007B)
+  return res_007C;
+}
+fun __String__.length (self_0075 : object) -> int {
+  var value_0077 : string = self_0075.value;
+  var res_0076 : int = _sool_string_length (value_0077)
+  return res_0076;
+}
+fun __String__.charAt (self_0070 : object, ix_0071 : int) -> int {
+  var value_0073 : string = self_0070.value;
+  var res_0072 : int = _sool_char_at (value_0073, ix_0071)
+  return res_0072;
+}
+fun __Int__.toString (self_006C : object) -> string {
+  var value_006E : int = self_006C.value;
+  var res_006D : string = _sool_int_to_string (value_006E)
+  return res_006D;
+}
+fun __Int__.char (self_0068 : object) -> string {
+  var value_006A : int = self_0068.value;
+  var res_0069 : string = _sool_int_to_char (value_006A)
+  return res_0069;
+}
+fun __Bool__.toString (self_0064 : object) -> string {
+  var value_0066 : bool = self_0064.value;
+  var res_0065 : string = _sool_bool_to_string (value_0066)
+  return res_0065;
+}
+fun __Bool__.not (self_0060 : object) -> bool {
+  var value_0061 : bool = self_0060.value;
+  var res_0062 : bool = BoolNot (value_0061);
+  return res_0062;
+}
+fun init___Bool__ (self_0099 : object, p0_0098 : bool) -> void {
+  self_0099.value := p0_0098;
+  return;
+}
+fun init___Int__ (self_009C : object, p0_009B : int) -> void {
+  self_009C.value := p0_009B;
+  return;
+}
+fun init___String__ (self_009F : object, p0_009E : string) -> void {
+  self_009F.value := p0_009E;
+  return;
+}
+fun BT.asNode (self_00A1 : object) -> object? {
+  return nil;
+}
+fun BT.asLeaf (self_00A3 : object) -> object? {
+  return nil;
+}
+fun BT.insert (self_00A6 : object, x_00A5 : int) -> object {
+  var md_00A7 : class_metadata = _sool_system_000F._md;
+  var fptr_00A8 : (object,string)->void = md_00A7::__System__.fail @4;
+  fptr_00A8 (_sool_system_000F, "BT.insert")
+  return self_00A6;
+}
+fun BT.member (self_00AB : object, x_00AA : int) -> bool {
+  var md_00AC : class_metadata = _sool_system_000F._md;
+  var fptr_00AD : (object,string)->void = md_00AC::__System__.fail @4;
+  fptr_00AD (_sool_system_000F, "BT.member")
+  return false;
+}
+fun init_BT (self_00AF : object) -> void {
+  return;
+}
+fun BTLeaf.asLeaf (self_00B1 : object) -> object? {
+  var t_00B2 : object? = self_00B1;
+  return t_00B2;
+}
+fun BTLeaf.insert (self_00B5 : object, x_00B4 : int) -> object {
+  var obj_00B6 : object = new BTNode
+  init_BTNode (obj_00B6, x_00B4)
+  var t_00B7 : object = obj_00B6;
+  return t_00B7;
+}
+fun BTLeaf.member (self_00BA : object, x_00B9 : int) -> bool {
+  return false;
+}
+fun init_BTLeaf (self_00BC : object) -> void {
+  init_BT (self_00BC)
+  return;
+}
+fun BTNode.asNode (self_00BE : object) -> object? {
+  var t_00BF : object? = self_00BE;
+  return t_00BF;
+}
+fun BTNode.insert (self_00C2 : object, x_00C1 : int) -> object {
+  var t_00C3 : int = self_00C2.value;
+  var t_00C4 : bool = IntLt (x_00C1, t_00C3);
+  if t_00C4 then {
+    var t_00C5 : object = self_00C2.left;
+    var md_00C6 : class_metadata = t_00C5._md;
+    var fptr_00C7 : (object,int)->object = md_00C6::BT.insert @3;
+    var res_00C8 : object = fptr_00C7 (t_00C5, x_00C1)
+    self_00C2.left := res_00C8;
+  }
+  else {
+    var t_00CA : int = self_00C2.value;
+    var t_00CB : bool = IntLt (t_00CA, x_00C1);
+    if t_00CB then {
+      var t_00CC : object = self_00C2.right;
+      var md_00CD : class_metadata = t_00CC._md;
+      var fptr_00CE : (object,int)->object = md_00CD::BT.insert @3;
+      var res_00CF : object = fptr_00CE (t_00CC, x_00C1)
+      self_00C2.right := res_00CF;
+    }
+  }
+  var t_00D2 : object = self_00C2;
+  return t_00D2;
+}
+fun BTNode.member (self_00D5 : object, x_00D4 : int) -> bool {
+  var t_00D6 : int = self_00D5.value;
+  var t_00D7 : bool = IntLt (t_00D6, x_00D4);
+  if t_00D7 then {
+    var t_00D8 : object = self_00D5.right;
+    var md_00D9 : class_metadata = t_00D8._md;
+    var fptr_00DA : (object,int)->bool = md_00D9::BT.member @2;
+    var res_00DB : bool = fptr_00DA (t_00D8, x_00D4)
+    return res_00DB;
+  }
+  else {
+    var t_00DD : int = self_00D5.value;
+    var t_00DE : bool = IntLt (x_00D4, t_00DD);
+    if t_00DE then {
+      var t_00DF : object = self_00D5.left;
+      var md_00E0 : class_metadata = t_00DF._md;
+      var fptr_00E1 : (object,int)->bool = md_00E0::BT.member @2;
+      var res_00E2 : bool = fptr_00E1 (t_00DF, x_00D4)
+      return res_00E2;
+    }
+    else {
+      return true;
+    }
+  }
+  return;
+}
+fun init_BTNode (self_00E8 : object, x_00E7 : int) -> void {
+  init_BT (self_00E8)
+  self_00E8.value := x_00E7;
+  var obj_00E9 : object = new BTLeaf
+  init_BTLeaf (obj_00E9)
+  self_00E8.left := obj_00E9;
+  var obj_00EA : object = new BTLeaf
+  init_BTLeaf (obj_00EA)
+  self_00E8.right := obj_00EA;
+  return;
+}
+fun main.pr (self_00EE : object, bst_00ED : object, x_00EC : int) -> void {
+  var obj_00EF : object = new __Int__
+  init___Int__ (obj_00EF, x_00EC)
+  var tpl_00F0 : <object,index_table> = <obj_00EF, __Int__@intI>
+  var t_00F1 : <object,index_table> = tpl_00F0;
+  var objptr_00F2 : object = #1(t_00F1);
+  var index_00F3 : index_table = #2(t_00F1);
+  var ix_00F4 : int = index_00F3::toString @1;
+  var md_00F5 : class_metadata = objptr_00F2._md;
+  var fptr_00F6 : (object)->string = md_00F5[ix_00F4];
+  var res_00F7 : string = fptr_00F6 (objptr_00F2)
+  var strRes_00F8 : string = _sool_string_cat ("member(", res_00F7)
+  var t_00F9 : string = strRes_00F8;
+  var strRes_00FA : string = _sool_string_cat (t_00F9, ") = ")
+  var t_00FB : string = strRes_00FA;
+  var md_00FC : class_metadata = bst_00ED._md;
+  var fptr_00FD : (object,int)->bool = md_00FC::BT.member @2;
+  var res_00FE : bool = fptr_00FD (bst_00ED, x_00EC)
+  var obj_00FF : object = new __Bool__
+  init___Bool__ (obj_00FF, res_00FE)
+  var tpl_0100 : <object,index_table> = <obj_00FF, __Bool__@boolI>
+  var t_0101 : <object,index_table> = tpl_0100;
+  var objptr_0102 : object = #1(t_0101);
+  var index_0103 : index_table = #2(t_0101);
+  var ix_0104 : int = index_0103::toString @1;
+  var md_0105 : class_metadata = objptr_0102._md;
+  var fptr_0106 : (object)->string = md_0105[ix_0104];
+  var res_0107 : string = fptr_0106 (objptr_0102)
+  var strRes_0108 : string = _sool_string_cat (t_00FB, res_0107)
+  var t_0109 : string = strRes_0108;
+  var strRes_010A : string = _sool_string_cat (t_0109, "\n")
+  var t_010B : string = strRes_010A;
+  var obj_010C : object = new __String__
+  init___String__ (obj_010C, t_010B)
+  var tpl_010D : <object,index_table> = <obj_010C, __String__@toStringI>
+  var t_010E : <object,index_table> = tpl_010D;
+  var md_010F : class_metadata = _sool_system_000F._md;
+  var fptr_0110 : (object,<object,index_table>)->void = md_010F::__System__.print @2;
+  fptr_0110 (_sool_system_000F, t_010E)
+  return;
+}
+fun main.run (self_0112 : object) -> void {
+  var obj_0113 : object = new BT
+  init_BT (obj_0113)
+  var obj_0114 : object = new BTLeaf
+  init_BTLeaf (obj_0114)
+  obj_0113 := obj_0114;
+  var md_0115 : class_metadata = obj_0113._md;
+  var fptr_0116 : (object,int)->object = md_0115::BT.insert @3;
+  var res_0117 : object = fptr_0116 (obj_0113, 42)
+  obj_0113 := res_0117;
+  var md_0118 : class_metadata = obj_0113._md;
+  var fptr_0119 : (object,int)->object = md_0118::BT.insert @3;
+  var res_011A : object = fptr_0119 (obj_0113, 17)
+  obj_0113 := res_011A;
+  var md_011B : class_metadata = obj_0113._md;
+  var fptr_011C : (object,int)->object = md_011B::BT.insert @3;
+  var res_011D : object = fptr_011C (obj_0113, 5)
+  obj_0113 := res_011D;
+  var t_011E : int = IntSub (0, 6);
+  var md_011F : class_metadata = obj_0113._md;
+  var fptr_0120 : (object,int)->object = md_011F::BT.insert @3;
+  var res_0121 : object = fptr_0120 (obj_0113, t_011E)
+  obj_0113 := res_0121;
+  var md_0122 : class_metadata = obj_0113._md;
+  var fptr_0123 : (object,int)->object = md_0122::BT.insert @3;
+  var res_0124 : object = fptr_0123 (obj_0113, 5)
+  obj_0113 := res_0124;
+  var md_0125 : class_metadata = self_0112._md;
+  var fptr_0126 : (object,object,int)->void = md_0125::main.pr @3;
+  fptr_0126 (self_0112, obj_0113, 1)
+  var t_0127 : int = IntSub (0, 7);
+  var md_0128 : class_metadata = self_0112._md;
+  var fptr_0129 : (object,object,int)->void = md_0128::main.pr @3;
+  fptr_0129 (self_0112, obj_0113, t_0127)
+  var md_012A : class_metadata = self_0112._md;
+  var fptr_012B : (object,object,int)->void = md_012A::main.pr @3;
+  fptr_012B (self_0112, obj_0113, 5)
+  var md_012C : class_metadata = self_0112._md;
+  var fptr_012D : (object,object,int)->void = md_012C::main.pr @3;
+  fptr_012D (self_0112, obj_0113, 42)
+  var md_012E : class_metadata = self_0112._md;
+  var fptr_012F : (object,object,int)->void = md_012E::main.pr @3;
+  fptr_012F (self_0112, obj_0113, 43)
+  var md_0130 : class_metadata = self_0112._md;
+  var fptr_0131 : (object,object,int)->void = md_0130::main.pr @3;
+  fptr_0131 (self_0112, obj_0113, 17)
+  var t_0132 : int = IntSub (0, 6);
+  var md_0133 : class_metadata = self_0112._md;
+  var fptr_0134 : (object,object,int)->void = md_0133::main.pr @3;
+  fptr_0134 (self_0112, obj_0113, t_0132)
+  return;
+}
+fun init_main (self_0136 : object) -> void {
+  return;
+}
+fun _sool_main () -> void {
+  var obj_0138 : object = new main
+  init_main (obj_0138)
+  var md_0139 : class_metadata = obj_0138._md;
+  var run_013A : (object)->void = md_0139::main.run @2;
+  run_013A (obj_0138)
+  return;
+}
+/* Program end */

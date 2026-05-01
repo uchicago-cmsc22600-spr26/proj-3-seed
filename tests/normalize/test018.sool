@@ -1,0 +1,15 @@
+/* test simple conditionals */
+class main () {
+  method b2s (b : bool) -> string {
+    if (b) {
+      return "true";
+    }
+    else {
+      return "false";
+    }
+  }
+  method run () -> void {
+    system.print("true  = " @ self.b2s(true) @ "\n");
+    system.print("false = " @ self.b2s(false) @ "\n");
+  }
+}

@@ -1,0 +1,4 @@
+/* print an integer */
+class main () {
+  method run () -> void { system.print(42); }
+}

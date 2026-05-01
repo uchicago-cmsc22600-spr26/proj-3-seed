@@ -1,0 +1,55 @@
+/* complicated coercion test */
+class A () {
+  method f () -> void { system.print("A.f\n"); }
+}
+
+class B () extends A() {
+  override method f () -> void { system.print("B.f\n"); }
+  method g () -> void { system.print("B.g\n"); }
+}
+
+class C () {
+  method h () -> void { system.print("C.h\n"); }
+  method f () -> void { system.print("C.f\n"); }
+}
+
+interface I {
+  method f () -> void
+  method g () -> void
+}
+
+interface J {
+  method g () -> void
+}
+
+interface K {
+  method f () -> void
+}
+
+class main () {
+  var a : A = A()
+  var b : B = B()
+  var c : C = C()
+
+  method A_f (x : A) -> void { x.f(); }
+  method I_f (x : I) -> void { x.f(); }
+  method I_g (x : I) -> void { x.g(); }
+  method J_g (x : J) -> void { x.g(); }
+  method K_f (x : K) -> void { x.f(); }
+
+  method I_to_J (x : I) -> J { return x; }
+  method I_to_K (x : I) -> K { return x; }
+
+  method run () -> void {
+    system.print("A_f(a) =         "); self.A_f(self.a);
+    system.print("A_f(b) =         "); self.A_f(self.b);
+    system.print("I_f(b) =         "); self.I_f(self.b);
+    system.print("I_g(b) =         "); self.I_g(self.b);
+    system.print("J_g(b) =         "); self.J_g(self.b);
+    system.print("J_g(I_to_J(b)) = "); self.J_g(self.I_to_J(self.b));
+    system.print("K_f(a) =         "); self.K_f(self.a);
+    system.print("K_f(b) =         "); self.K_f(self.b);
+    system.print("K_f(c) =         "); self.K_f(self.c);
+    system.print("K_f(I_to_K(b)) = "); self.K_f(self.I_to_K(self.b));
+  }
+}

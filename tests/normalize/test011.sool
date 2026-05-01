@@ -1,0 +1,7 @@
+/* test member-variable access */
+class main () {
+  var x : string = "42\n"
+  method run () -> void {
+    system.print(self.x);
+  }
+}

@@ -1,0 +1,7 @@
+/* test string concat */
+class main () {
+  method cat (a : string, b : string) -> string { return a@b; }
+  method run () -> void {
+    system.print(self.cat("the answer is = ", "42\n"));
+  }
+}

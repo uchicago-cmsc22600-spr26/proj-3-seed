@@ -1,0 +1,16 @@
+/* test subclass object initialization  */
+class A (s : string) {
+  var x : string = s
+}
+class B (s : string) extends A(s) {
+  var a : int = 42
+  method f () -> void {
+    system.print(self.x);
+  }
+}
+
+class main () {
+  method run () -> void {
+    B("42\n").f();
+  }
+}

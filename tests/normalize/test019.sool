@@ -1,0 +1,11 @@
+/* test '&&' */
+
+class main () {
+  method and (a : bool, b : bool) -> bool { return (a && b); }
+  method run () -> void {
+    system.print("false AND false  = " @ self.and(false, false).toString() @ "\n");
+    system.print("false AND true   = " @ self.and(false, true).toString() @ "\n");
+    system.print("true AND false   = " @ self.and(true, false).toString() @ "\n");
+    system.print("true AND true    = " @ self.and(true, true).toString() @ "\n");
+  }
+}

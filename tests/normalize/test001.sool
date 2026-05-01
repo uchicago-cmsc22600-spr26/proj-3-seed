@@ -1,8 +1,4 @@
-// triv.sool
-//
-// the minimal SooL program
-//
-
+/* minimal sool program */
 class main () {
-    method run () -> void { }
+  method run () -> void { }
 }

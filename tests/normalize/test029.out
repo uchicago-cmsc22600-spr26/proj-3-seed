@@ -1,0 +1,6 @@
+(hi == hi)    = true
+(hi == world) = false
+(hi != hi)    = false
+(hi != world) = true
+(nil == nil)  = true
+(hi == nil)   = false

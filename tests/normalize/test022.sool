@@ -1,0 +1,33 @@
+/* test nested conditionals */
+class main () {
+  method f (a : bool, b : bool, c : bool) -> int {
+    var x = -1;
+    if (a) {
+      if (b) {
+        if (c) { x = 7; } else { x = 6; }
+      }
+      else {
+        if (c) { x = 5; } else { x = 4; }
+      }
+    }
+    else {
+      if (b) {
+        if (c) { x = 3; } else { x = 2; }
+      }
+      else {
+        if (c) { x = 1; } else { x = 0; }
+      }
+    }
+    return x;
+  }
+  method run () -> void {
+    system.print(self.f(false, false, false).toString() @ "\n");
+    system.print(self.f(false, false, true).toString() @ "\n");
+    system.print(self.f(false, true, false).toString() @ "\n");
+    system.print(self.f(false, true, true).toString() @ "\n");
+    system.print(self.f(true, false, false).toString() @ "\n");
+    system.print(self.f(true, false, true).toString() @ "\n");
+    system.print(self.f(true, true, false).toString() @ "\n");
+    system.print(self.f(true, true, true).toString() @ "\n");
+  }
+}

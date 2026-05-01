@@ -1,0 +1,4 @@
+/* print a boolean */
+class main () {
+  method run () -> void { system.print(true); }
+}

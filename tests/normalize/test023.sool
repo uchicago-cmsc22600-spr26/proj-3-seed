@@ -1,0 +1,10 @@
+/* test a simple loop */
+class main () {
+  method run () -> void {
+    var i = 1;
+    while (i <= 10) {
+      system.print(i.toString() @ "\n");
+      i = i + 1;
+    }
+  }
+}

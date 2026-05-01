@@ -1,0 +1,2 @@
+a.getX() = nil
+a.getX() = initialized

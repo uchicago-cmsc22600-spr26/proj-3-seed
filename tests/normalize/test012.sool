@@ -1,0 +1,8 @@
+/* test member-variable assignment */
+class main () {
+  var x : string = "bogus\n"
+  method run () -> void {
+    self.x = "42\n";
+    system.print(self.x);
+  }
+}

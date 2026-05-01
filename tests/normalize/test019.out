@@ -1,0 +1,4 @@
+false AND false  = false
+false AND true   = false
+true AND false   = false
+true AND true    = true

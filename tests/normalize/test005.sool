@@ -1,0 +1,7 @@
+/* test addition */
+class main () {
+  method add (a : int, b : int) -> int { return a+b; }
+  method run () -> void {
+    system.print("12 + 30 = "); system.print(self.add(12, 30)); system.print("\n");
+  }
+}

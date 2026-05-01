@@ -1,0 +1,13 @@
+/* test object initialization */
+class A (s : string) {
+  var x : string = s
+  method f () -> void {
+    system.print(self.x);
+  }
+}
+
+class main () {
+  method run () -> void {
+    A("42\n").f();
+  }
+}

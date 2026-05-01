@@ -1,0 +1,15 @@
+/* test that required operator signals an error on nil */
+
+class A () {
+  method print () -> void { system.print ("hello\n"); }
+}
+class B () {
+  method get () -> A? { return A.nil; }
+}
+class main () {
+  var b : B = B()
+  method run () -> void {
+    var a = self.b.get()!;
+    a.print();
+  }
+}

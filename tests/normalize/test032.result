@@ -1,0 +1,242 @@
+/* SOIR: after normalization */
+class __System__ {
+  metadata {
+    [  0] 1
+    [  1] nil
+    [  2] __System__.print
+    [  3] __System__.input
+    [  4] __System__.fail
+    [  5] __System__.exit
+  }
+}
+class A {
+  [  1] var x : object? 
+  metadata {
+    [  0] 2
+    [  1] nil
+    [  2] A.getXX
+    [  3] A.init
+  }
+}
+class __String__ {
+  [  1] var value : string 
+  metadata {
+    [  0] 2
+    [  1] nil
+    [  2] __String__.toString
+    [  3] __String__.toInt
+    [  4] __String__.substring
+    [  5] __String__.length
+    [  6] __String__.charAt
+    [  7] __String__@toStringI
+  }
+}
+class main {
+  metadata {
+    [  0] 1
+    [  1] nil
+    [  2] main.run
+    [  3] main.pr
+  }
+}
+class __Bool__ {
+  [  1] var value : bool 
+  metadata {
+    [  0] 2
+    [  1] nil
+    [  2] __Bool__.toString
+    [  3] __Bool__.not
+  }
+}
+class __Int__ {
+  [  1] var value : int 
+  metadata {
+    [  0] 2
+    [  1] nil
+    [  2] __Int__.toString
+    [  3] __Int__.char
+  }
+}
+index_table __String__@toStringI {
+  [  0] toString: @2
+}
+fun __System__.print (self_0073 : object, arg_0074 : <object,index_table>) -> void {
+  var obj_0075 : object = #1(arg_0074);
+  var index_0076 : index_table = #2(arg_0074);
+  var md_0077 : class_metadata = obj_0075._md;
+  var ix_0078 : int = index_0076::toString @0;
+  var toString_0079 : (object)->string = md_0077[ix_0078];
+  var s_007A : string = toString_0079 (obj_0075)
+  _sool_print (s_007A)
+  return;
+}
+fun __System__.input (self_0070 : object) -> string? {
+  var res_0071 : string? = _sool_input ()
+  return res_0071;
+}
+fun __System__.fail (self_006D : object, msg_006E : string) -> void {
+  _sool_fail (msg_006E)
+  return;
+}
+fun __System__.exit (self_006B : object) -> void {
+  _sool_exit ()
+  return;
+}
+fun __String__.toString (self_0067 : object) -> string {
+  var value_0069 : string = self_0067.value;
+  return value_0069;
+}
+fun __String__.toInt (self_0063 : object) -> int? {
+  var value_0065 : string = self_0063.value;
+  var res_0064 : int? = _sool_string_to_int (value_0065)
+  return res_0064;
+}
+fun __String__.substring (self_005D : object, i_005E : int, n_005F : int) -> string {
+  var value_0061 : string = self_005D.value;
+  var res_0060 : string = _sool_substring (value_0061, i_005E, n_005F)
+  return res_0060;
+}
+fun __String__.length (self_0059 : object) -> int {
+  var value_005B : string = self_0059.value;
+  var res_005A : int = _sool_string_length (value_005B)
+  return res_005A;
+}
+fun __String__.charAt (self_0054 : object, ix_0055 : int) -> int {
+  var value_0057 : string = self_0054.value;
+  var res_0056 : int = _sool_char_at (value_0057, ix_0055)
+  return res_0056;
+}
+fun __Int__.toString (self_0050 : object) -> string {
+  var value_0052 : int = self_0050.value;
+  var res_0051 : string = _sool_int_to_string (value_0052)
+  return res_0051;
+}
+fun __Int__.char (self_004C : object) -> string {
+  var value_004E : int = self_004C.value;
+  var res_004D : string = _sool_int_to_char (value_004E)
+  return res_004D;
+}
+fun __Bool__.toString (self_0048 : object) -> string {
+  var value_004A : bool = self_0048.value;
+  var res_0049 : string = _sool_bool_to_string (value_004A)
+  return res_0049;
+}
+fun __Bool__.not (self_0044 : object) -> bool {
+  var value_0045 : bool = self_0044.value;
+  var res_0046 : bool = BoolNot (value_0045);
+  return res_0046;
+}
+fun init___Bool__ (self_007D : object, p0_007C : bool) -> void {
+  self_007D.value := p0_007C;
+  return;
+}
+fun init___Int__ (self_0080 : object, p0_007F : int) -> void {
+  self_0080.value := p0_007F;
+  return;
+}
+fun init___String__ (self_0083 : object, p0_0082 : string) -> void {
+  self_0083.value := p0_0082;
+  return;
+}
+fun A.init (self_0085 : object) -> void {
+  self_0085.x := self_0085;
+  return;
+}
+fun A.getXX (self_0087 : object) -> object? {
+  var optSel_0088 : object?;
+  var t_0089 : object? = self_0087.x;
+  var isNil_008A : bool = isNil (t_0089);
+  if isNil_008A then {
+    optSel_0088 := nil;
+  }
+  else {
+    optSel_0088 := t_0089.x;
+  }
+  return optSel_0088;
+}
+fun init_A (self_008E : object) -> void {
+  self_008E.x := nil;
+  return;
+}
+fun main.pr (self_0091 : object, x_0090 : object?) -> void {
+  var t_0092 : bool = ObjEqu (x_0090, nil);
+  if t_0092 then {
+    var obj_0093 : object = new __String__
+    init___String__ (obj_0093, "nil")
+    var tpl_0094 : <object,index_table> = <obj_0093, __String__@toStringI>
+    var t_0095 : <object,index_table> = tpl_0094;
+    var md_0096 : class_metadata = _sool_system_000F._md;
+    var fptr_0097 : (object,<object,index_table>)->void = md_0096::__System__.print @2;
+    fptr_0097 (_sool_system_000F, t_0095)
+  }
+  else {
+    var obj_0099 : object = new __String__
+    init___String__ (obj_0099, "A")
+    var tpl_009A : <object,index_table> = <obj_0099, __String__@toStringI>
+    var t_009B : <object,index_table> = tpl_009A;
+    var md_009C : class_metadata = _sool_system_000F._md;
+    var fptr_009D : (object,<object,index_table>)->void = md_009C::__System__.print @2;
+    fptr_009D (_sool_system_000F, t_009B)
+  }
+  return;
+}
+fun main.run (self_00A0 : object) -> void {
+  var obj_00A1 : object = new A
+  init_A (obj_00A1)
+  var obj_00A2 : object = new __String__
+  init___String__ (obj_00A2, "a.getXX() = ")
+  var tpl_00A3 : <object,index_table> = <obj_00A2, __String__@toStringI>
+  var t_00A4 : <object,index_table> = tpl_00A3;
+  var md_00A5 : class_metadata = _sool_system_000F._md;
+  var fptr_00A6 : (object,<object,index_table>)->void = md_00A5::__System__.print @2;
+  fptr_00A6 (_sool_system_000F, t_00A4)
+  var md_00A7 : class_metadata = obj_00A1._md;
+  var fptr_00A8 : (object)->object? = md_00A7::A.getXX @2;
+  var res_00A9 : object? = fptr_00A8 (obj_00A1)
+  var md_00AA : class_metadata = self_00A0._md;
+  var fptr_00AB : (object,object?)->void = md_00AA::main.pr @3;
+  fptr_00AB (self_00A0, res_00A9)
+  var obj_00AC : object = new __String__
+  init___String__ (obj_00AC, "\n")
+  var tpl_00AD : <object,index_table> = <obj_00AC, __String__@toStringI>
+  var t_00AE : <object,index_table> = tpl_00AD;
+  var md_00AF : class_metadata = _sool_system_000F._md;
+  var fptr_00B0 : (object,<object,index_table>)->void = md_00AF::__System__.print @2;
+  fptr_00B0 (_sool_system_000F, t_00AE)
+  var md_00B1 : class_metadata = obj_00A1._md;
+  var fptr_00B2 : (object)->void = md_00B1::A.init @3;
+  fptr_00B2 (obj_00A1)
+  var obj_00B3 : object = new __String__
+  init___String__ (obj_00B3, "a.getXX() = ")
+  var tpl_00B4 : <object,index_table> = <obj_00B3, __String__@toStringI>
+  var t_00B5 : <object,index_table> = tpl_00B4;
+  var md_00B6 : class_metadata = _sool_system_000F._md;
+  var fptr_00B7 : (object,<object,index_table>)->void = md_00B6::__System__.print @2;
+  fptr_00B7 (_sool_system_000F, t_00B5)
+  var md_00B8 : class_metadata = obj_00A1._md;
+  var fptr_00B9 : (object)->object? = md_00B8::A.getXX @2;
+  var res_00BA : object? = fptr_00B9 (obj_00A1)
+  var md_00BB : class_metadata = self_00A0._md;
+  var fptr_00BC : (object,object?)->void = md_00BB::main.pr @3;
+  fptr_00BC (self_00A0, res_00BA)
+  var obj_00BD : object = new __String__
+  init___String__ (obj_00BD, "\n")
+  var tpl_00BE : <object,index_table> = <obj_00BD, __String__@toStringI>
+  var t_00BF : <object,index_table> = tpl_00BE;
+  var md_00C0 : class_metadata = _sool_system_000F._md;
+  var fptr_00C1 : (object,<object,index_table>)->void = md_00C0::__System__.print @2;
+  fptr_00C1 (_sool_system_000F, t_00BF)
+  return;
+}
+fun init_main (self_00C3 : object) -> void {
+  return;
+}
+fun _sool_main () -> void {
+  var obj_00C5 : object = new main
+  init_main (obj_00C5)
+  var md_00C6 : class_metadata = obj_00C5._md;
+  var run_00C7 : (object)->void = md_00C6::main.run @2;
+  run_00C7 (obj_00C5)
+  return;
+}
+/* Program end */

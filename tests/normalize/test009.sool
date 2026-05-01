@@ -1,0 +1,7 @@
+/* test negation */
+class main () {
+  method neg (a : int) -> int { return -a; }
+  method run () -> void {
+    system.print("-42 =     "); system.print(self.neg(42)); system.print("\n");
+  }
+}

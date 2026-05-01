@@ -1,0 +1,51 @@
+/* points example */
+class point (x : int, y : int) {
+  var x : int = x
+  var y : int = y
+  method x () -> int { return self.x; }
+  method y () -> int { return self.y; }
+  method move (dx : int, dy : int) -> void {
+    self.x = self.x + dx;
+    self.y = self.y + dy;
+  }
+  method add (pt : point) -> point {
+    self.move (pt.x, pt.y);
+    return self;
+  }
+  method toFast () -> fastPoint {
+    return fastPoint.as(self) ?? fastPoint(self.x, self.y);
+  }
+}
+
+class colorPoint (x : int, y : int, c : string)
+  extends point (x, y)
+{
+  var c : string = c
+  method color () -> string { return self.c; }
+}
+
+class fastPoint (x : int, y : int)
+  extends point (x, y)
+{
+  override method move (dx : int, dy : int) -> void {
+    self.x = self.x + 2 * dx;
+    self.y = self.y + 2 * dy;
+  }
+}
+
+class main () {
+    method println (s : string, n : int) -> void {
+	system.print (s);
+	system.print (n);
+	system.print ("\n");
+    }
+    method run () -> void {
+	var p = point(17, 42);
+	self.println ("42 = ", p.y());
+	self.println ("54 = ", p.add(point(13, 12)).y());
+	self.println ("42 = ", colorPoint(17, 42, "red").y());
+	self.println ("84 = ", fastPoint(0,0).add(point(17, 42)).y());
+	self.println ("84 = ", point(0,0).toFast().add(point(17, 42)).y());
+	self.println ("84 = ", fastPoint(0,0).toFast().add(point(17, 42)).y());
+    }
+}

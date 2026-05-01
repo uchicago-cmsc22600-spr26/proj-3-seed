@@ -1,0 +1,23 @@
+/* test optional member-variable selection */
+class A () {
+  var x : A? = A.nil
+  method init () -> void { self.x = self; }
+  method getXX () -> A? { return self.x?x; }
+}
+
+class main () {
+  method pr (x : A?) -> void {
+    if (x == A.nil) {
+      system.print("nil");
+    }
+    else {
+      system.print("A");
+    }
+  }
+  method run () -> void {
+    var a = A();
+    system.print("a.getXX() = "); self.pr(a.getXX()); system.print ("\n");
+    a.init();
+    system.print("a.getXX() = "); self.pr(a.getXX()); system.print ("\n");
+  }
+}

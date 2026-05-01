@@ -1,0 +1,19 @@
+/* test class-interface equality */
+
+class A () {
+  method toString () -> string { return "hello\n"; }
+}
+
+class B (x : toStringI) {
+  var s : toStringI = x
+  method equ (x : A) -> bool { return self.s == x; }
+}
+
+class main () {
+  method run () -> void {
+    var a = A();
+    var b = B(a);
+    system.print("true  = " @ b.equ(a).toString() @ "\n");
+    system.print("false = " @ b.equ(A()).toString() @ "\n");
+  }
+}

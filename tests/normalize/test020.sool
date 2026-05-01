@@ -1,0 +1,11 @@
+/* test '||' */
+
+class main () {
+  method or (a : bool, b : bool) -> bool { return (a || b); }
+  method run () -> void {
+    system.print("false OR false  = " @ self.or(false, false).toString() @ "\n");
+    system.print("false OR true   = " @ self.or(false, true).toString() @ "\n");
+    system.print("true OR false   = " @ self.or(true, false).toString() @ "\n");
+    system.print("true OR true    = " @ self.or(true, true).toString() @ "\n");
+  }
+}

@@ -1,0 +1,10 @@
+/* test order of statement execution */
+class main () {
+  method run () -> void {
+    var x =2;
+    x = x+1;
+    x = 3*x;
+    x = x + 2;
+    system.print("the answer = " @ x.toString() @ "\n");
+  }
+}

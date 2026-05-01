@@ -1,8 +1,4 @@
-// hello.sool
-//
-
+/* print a string */
 class main () {
-    method run () -> void {
-	system.print ("hello world\n");
-    }
+  method run () -> void { system.print ("hello\n"); }
 }

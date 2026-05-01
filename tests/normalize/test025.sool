@@ -1,0 +1,14 @@
+/* factorial function using recursion*/
+
+class main () {
+  method fact (n : int) -> int {
+    if (n <= 0) { return 1; } else { return n * self.fact(n-1); }
+  }
+
+  method run () -> void {
+    system.print("fact 5 = ");
+    system.print(self.fact(5));
+    system.print("\n");
+  }
+
+}

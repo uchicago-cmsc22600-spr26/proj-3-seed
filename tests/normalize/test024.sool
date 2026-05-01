@@ -1,0 +1,21 @@
+/* factorial function using a loop */
+
+class main () {
+  method fact (n : int) -> int {
+    if (n <= 0) { return 1; }
+    var i = 1;
+    var fact = 1;
+    while (i <= n) {
+	fact = fact*i;
+	i = i+1;
+    }
+    return fact;
+  }
+
+  method run () -> void {
+    system.print("fact 5 = ");
+    system.print(self.fact(5));
+    system.print("\n");
+  }
+
+}

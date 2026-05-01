@@ -23,8 +23,9 @@ class __String__ {
   }
 }
 class main {
+  [  1] var x : string 
   metadata {
-    [  0] 1
+    [  0] 2
     [  1] nil
     [  2] main.run
   }
@@ -129,24 +130,27 @@ fun init___String__ (self_007A : object, p0_0079 : string) -> void {
   return;
 }
 fun main.run (self_007C : object) -> void {
-  var obj_007D : object = new __String__
-  init___String__ (obj_007D, "hello\n")
-  var tpl_007E : <object,index_table> = <obj_007D, __String__@toStringI>
-  var t_007F : <object,index_table> = tpl_007E;
-  var md_0080 : class_metadata = _sool_system_000F._md;
-  var fptr_0081 : (object,<object,index_table>)->void = md_0080::__System__.print @2;
-  fptr_0081 (_sool_system_000F, t_007F)
+  self_007C.x := "42\n";
+  var t_007D : string = self_007C.x;
+  var obj_007E : object = new __String__
+  init___String__ (obj_007E, t_007D)
+  var tpl_007F : <object,index_table> = <obj_007E, __String__@toStringI>
+  var t_0080 : <object,index_table> = tpl_007F;
+  var md_0081 : class_metadata = _sool_system_000F._md;
+  var fptr_0082 : (object,<object,index_table>)->void = md_0081::__System__.print @2;
+  fptr_0082 (_sool_system_000F, t_0080)
   return;
 }
-fun init_main (self_0083 : object) -> void {
+fun init_main (self_0084 : object) -> void {
+  self_0084.x := "bogus\n";
   return;
 }
 fun _sool_main () -> void {
-  var obj_0085 : object = new main
-  init_main (obj_0085)
-  var md_0086 : class_metadata = obj_0085._md;
-  var run_0087 : (object)->void = md_0086::main.run @2;
-  run_0087 (obj_0085)
+  var obj_0086 : object = new main
+  init_main (obj_0086)
+  var md_0087 : class_metadata = obj_0086._md;
+  var run_0088 : (object)->void = md_0087::main.run @2;
+  run_0088 (obj_0086)
   return;
 }
 /* Program end */

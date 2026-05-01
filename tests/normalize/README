@@ -1,0 +1,43 @@
+The following is a summary of what each file tests.
+
+test001.sool:  /* minimal sool program */
+test002.sool:  /* print a string */
+test003.sool:  /* print a boolean */
+test004.sool:  /* print an integer */
+test005.sool:  /* test addition */
+test006.sool:  /* test subtraction */
+test007.sool:  /* test multiplication */
+test008.sool:  /* test division */
+test009.sool:  /* test negation */
+test010.sool:  /* test string concat */
+test011.sool:  /* test member-variable access */
+test012.sool:  /* test member-variable assignment */
+test013.sool:  /* test object initialization */
+test014.sool:  /* test subclass object initialization  */
+test015.sool:  /* test order of evaluation of arithmetic */
+test016.sool:  /* test order of evaluation of function arguments */
+test017.sool:  /* test order of statement execution */
+test018.sool:  /* test simple conditionals */
+test019.sool:  /* test '&&' */
+test020.sool:  /* test '||' */
+test021.sool:  /* test nested conditionals with returns */
+test022.sool:  /* test nested conditionals */
+test023.sool:  /* test a simple loop */
+test024.sool:  /* factorial function using a loop */
+test025.sool:  /* factorial function using recursion*/
+test026.sool:  /* class-to-interface coercions */
+test027.sool:  /* test boolean equality */
+test028.sool:  /* test integer equality */
+test029.sool:  /* test string equality */
+test030.sool:  /* test class-interface equality */
+test031.sool:  /* test interface-interface equality */
+test032.sool:  /* test optional member-variable selection */
+test033.sool:  /* test optional member-function selection */
+test034.sool:  /* test require operator */
+test035.sool:  /* complicated coercion test */
+test036.sool:  /* points example */
+test037.sool:  /* test BST implemented with visitor pattern */
+
+err-test001.sool:  /* test that required operator signals an error on nil */
+err-test002.sool:  /* test that required variable selection signals an error on nil */
+err-test003.sool:  /* test that required function selection signals an error on nil */

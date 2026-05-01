@@ -10,7 +10,7 @@ class __System__ {
   }
 }
 class __String__ {
-  [  1] var value : string 
+  [  1] var value : string
   metadata {
     [  0] 2
     [  1] nil
@@ -29,7 +29,7 @@ class main {
   }
 }
 class __Bool__ {
-  [  1] var value : bool 
+  [  1] var value : bool
   metadata {
     [  0] 2
     [  1] nil
@@ -38,7 +38,7 @@ class __Bool__ {
   }
 }
 class __Int__ {
-  [  1] var value : int 
+  [  1] var value : int
   metadata {
     [  0] 2
     [  1] nil
@@ -134,7 +134,7 @@ fun _sool_main () -> void {
   var obj_007F : object = new main
   init_main (obj_007F)
   var md_0080 : class_metadata = obj_007F._md;
-  var run_0081 : (object)->void = md_0080::main.run @1;
+  var run_0081 : (object)->void = md_0080::main.run @2;
   run_0081 (obj_007F)
   return;
 }

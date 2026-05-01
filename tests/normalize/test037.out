@@ -1,0 +1,7 @@
+member(1) = false
+member(-7) = false
+member(5) = true
+member(42) = true
+member(43) = false
+member(17) = true
+member(-6) = true
